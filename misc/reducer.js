@@ -34,6 +34,19 @@ export default function reducer(state, action) {
         ),
       };
     }
+    case actions.DELETE_ITEM: {
+      const { rowNum, itemNum } = action;
+      const clonedRow = _.clone(state.rows[rowNum]);
+      _.pullAt(clonedRow, itemNum);
+      return {
+        ...state,
+        rows: [
+          ...state.rows.slice(0, rowNum),
+          clonedRow,
+          ...state.rows.slice(rowNum + 1),
+        ],
+      };
+    }
     case actions.UPDATE_ITEM: {
       const { rowNum, itemNum, params } = action;
 

@@ -1,6 +1,6 @@
 import Tooltip from "rc-tooltip";
 import { useState } from "react";
-import { updateItem, addItemBefore } from "../misc/action_creators";
+import { deleteItem, updateItem, addItemBefore } from "../misc/action_creators";
 
 export default function RowItem({ item, itemNum, rowNum, dispatch }) {
   const { text, url, keyboardShortcut } = item;
@@ -70,7 +70,7 @@ export default function RowItem({ item, itemNum, rowNum, dispatch }) {
         <button onClick={updateValues}>Update</button>
       </div>
       <div>
-        <button onClick={() => window.alert("I never coded this")}>
+        <button onClick={() => dispatch(deleteItem(rowNum, itemNum))}>
           ❌ Delete
         </button>
       </div>

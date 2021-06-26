@@ -36,3 +36,11 @@ export function updateItem(rowNum, itemNum, params) {
     params,
   };
 }
+
+export function deleteItem(rowNum, itemNum) {
+  return {
+    type: actions.DELETE_ITEM,
+    rowNum,
+    itemNum,
+  };
+}
