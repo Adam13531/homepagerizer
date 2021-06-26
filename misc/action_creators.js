@@ -5,3 +5,10 @@ export function addRow() {
     type: actions.ADD_ROW,
   };
 }
+
+export function deleteRow(rowNum) {
+  return {
+    type: actions.DELETE_ROW,
+    rowNum,
+  };
+}

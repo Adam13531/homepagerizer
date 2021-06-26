@@ -1,12 +1,14 @@
 import _ from "lodash";
 import Row from "./Row";
-import { addRow } from "../misc/action_creators";
+import { addRow, deleteRow } from "../misc/action_creators";
 
 export default function Rows({ state, dispatch }) {
   return (
     <>
       {_.map(state.rows, (row, rowNum) => (
-        <Row key={rowNum}>Hello world</Row>
+        <Row key={rowNum} onDelete={() => dispatch(deleteRow(rowNum))}>
+          Hello world
+        </Row>
       ))}
 
       <button
