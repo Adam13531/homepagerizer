@@ -1,12 +1,7 @@
 import _ from "lodash";
 import Row from "./Row";
 import RowItem from "./RowItem";
-import {
-  addRow,
-  deleteRow,
-  addItemAtEndOfRow,
-  addItemBefore,
-} from "../misc/action_creators";
+import { addRow, deleteRow, addItemAtEndOfRow } from "../misc/action_creators";
 
 export default function Rows({ state, dispatch }) {
   return (
@@ -22,11 +17,11 @@ export default function Rows({ state, dispatch }) {
           {_.map(row, (item, itemNum) => {
             return (
               <RowItem
-                id={`${item.id}`}
                 key={`${item.id}`}
+                item={item}
                 itemNum={itemNum}
                 rowNum={rowNum}
-                onAddItem={() => dispatch(addItemBefore(rowNum, itemNum))}
+                dispatch={dispatch}
               />
             );
           })}

@@ -27,3 +27,12 @@ export function addItemBefore(rowNum, itemNum) {
     itemNum,
   };
 }
+
+export function updateItem(rowNum, itemNum, params) {
+  return {
+    type: actions.UPDATE_ITEM,
+    rowNum,
+    itemNum,
+    params,
+  };
+}

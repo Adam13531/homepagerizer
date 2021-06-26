@@ -5,6 +5,7 @@ const actions = createEnum([
   "DELETE_ROW",
   "ADD_ITEM_AT_END_OF_ROW",
   "ADD_ITEM_BEFORE",
+  "UPDATE_ITEM",
 ]);
 
 export default actions;

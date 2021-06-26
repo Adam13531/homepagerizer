@@ -34,6 +34,23 @@ export default function reducer(state, action) {
         ),
       };
     }
+    case actions.UPDATE_ITEM: {
+      const { rowNum, itemNum, params } = action;
+
+      const clonedRow = _.clone(state.rows[rowNum]);
+      clonedRow[itemNum] = {
+        ...clonedRow[itemNum],
+        ...params,
+      };
+      return {
+        ...state,
+        rows: [
+          ...state.rows.slice(0, rowNum),
+          clonedRow,
+          ...state.rows.slice(rowNum + 1),
+        ],
+      };
+    }
     case actions.ADD_ITEM_AT_END_OF_ROW: {
       const { rowNum } = action;
       const newItem = makeNewTextItem();

@@ -4,6 +4,7 @@ import reducer from "../misc/reducer";
 import { useReducer } from "react";
 
 import "tailwindcss/tailwind.css";
+import "rc-tooltip/assets/bootstrap.css";
 
 const initialState = {
   rows: [],
