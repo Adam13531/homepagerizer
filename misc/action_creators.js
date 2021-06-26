@@ -12,3 +12,18 @@ export function deleteRow(rowNum) {
     rowNum,
   };
 }
+
+export function addItemAtEndOfRow(rowNum) {
+  return {
+    type: actions.ADD_ITEM_AT_END_OF_ROW,
+    rowNum,
+  };
+}
+
+export function addItemBefore(rowNum, itemNum) {
+  return {
+    type: actions.ADD_ITEM_BEFORE,
+    rowNum,
+    itemNum,
+  };
+}
