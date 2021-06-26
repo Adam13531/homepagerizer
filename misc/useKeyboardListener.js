@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import _ from "lodash";
+import { toast } from "react-toastify";
 import {
   setItemIdListeningForHotkey,
   setLastPressedHotkey,
@@ -24,25 +25,29 @@ const invalidHotkeys = [
 ];
 
 /**
- * Returns true if the specified keyboard shortcut is in use.
+ * Finds the item using the specified keyboard shortcut.
  * @param {Object} state
  * @param {string} keyboardShortcut
- * @return {boolean}
+ * @return {?item}
  */
-function isKeyboardShortcutInUse(state, keyboardShortcut) {
+function getItemUsingKeyboardShortcut(state, keyboardShortcut) {
   // This searches through every row and item rather than using a hashmap. It
   // can be improved, but there likely won't ever be more than about 100 items
   // anyway on anyone's homepage.
-  return _.find(state.rows, (row) => {
-    return _.find(row, { keyboardShortcut });
-  });
+  const { rows } = state;
+  for (let row of rows) {
+    const foundItem = _.find(row, { keyboardShortcut });
+    if (!_.isNil(foundItem)) {
+      return foundItem;
+    }
+  }
+  return null;
 }
 
 export default function useKeyboardListener(state, dispatch) {
   useEffect(() => {
     const handleKeyDown = (e) => {
       const { key } = e;
-      console.log("key: " + JSON.stringify(key));
 
       // If we're not even listening for a hotkey, then don't do anything.
       if (_.isNil(state.itemIdListeningForHotkey)) {
@@ -60,13 +65,13 @@ export default function useKeyboardListener(state, dispatch) {
         return;
       }
 
-      const toast = () => {
-        window.alert("I never coded the toast stuff");
-      };
-
-      if (isKeyboardShortcutInUse(state, key)) {
+      const itemUsingKeyboardShortcut = getItemUsingKeyboardShortcut(
+        state,
+        key
+      );
+      if (!_.isNil(itemUsingKeyboardShortcut)) {
         toast(
-          `${key} is already in use; press another keyboard key or escape to cancel.`,
+          `${key} is already in use by "${itemUsingKeyboardShortcut.text}"; press another keyboard key or escape to cancel.`,
           {
             type: "error",
           }

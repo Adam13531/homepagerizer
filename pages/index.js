@@ -2,10 +2,12 @@ import Head from "next/head";
 import Rows from "../components/Rows";
 import reducer from "../misc/reducer";
 import { useReducer } from "react";
+import { ToastContainer } from "react-toastify";
 import useKeyboardListener from "../misc/useKeyboardListener";
 
 import "tailwindcss/tailwind.css";
 import "rc-tooltip/assets/bootstrap.css";
+import "react-toastify/dist/ReactToastify.css";
 
 const initialState = {
   rows: [],
@@ -38,6 +40,12 @@ export default function Home() {
       </Head>
       <main>
         <Rows state={state} dispatch={dispatch} />
+        <ToastContainer
+          position="top-left"
+          autoClose={5000}
+          closeOnClick
+          pauseOnHover
+        />
       </main>
     </div>
   );
