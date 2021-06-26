@@ -14,6 +14,10 @@ export default function reducer(state, action) {
   switch (action.type) {
     case actions.ADD_ROW:
       return { ...state, rows: [...state.rows, []] };
+    case actions.SET_LISTENING_FOR_HOTKEY:
+      return { ...state, itemIdListeningForHotkey: action.itemId };
+    case actions.SET_LAST_PRESSED_HOTKEY:
+      return { ...state, lastPressedHotkey: action.value };
     case actions.DELETE_ROW: {
       const { rowNum } = action;
       return {
@@ -36,15 +40,20 @@ export default function reducer(state, action) {
     }
     case actions.DELETE_ITEM: {
       const { rowNum, itemNum } = action;
-      const clonedRow = _.clone(state.rows[rowNum]);
+      const { itemIdListeningForHotkey, rows } = state;
+
+      // If the item we're deleting is the one that was listening for a hotkey,
+      // then we have to reset that state.
+      const deletingItemListeningForHotkey =
+        itemIdListeningForHotkey === rows[rowNum][itemNum].id;
+      const clonedRow = _.clone(rows[rowNum]);
       _.pullAt(clonedRow, itemNum);
       return {
         ...state,
-        rows: [
-          ...state.rows.slice(0, rowNum),
-          clonedRow,
-          ...state.rows.slice(rowNum + 1),
-        ],
+        itemIdListeningForHotkey: deletingItemListeningForHotkey
+          ? null
+          : itemIdListeningForHotkey,
+        rows: [...rows.slice(0, rowNum), clonedRow, ...rows.slice(rowNum + 1)],
       };
     }
     case actions.UPDATE_ITEM: {

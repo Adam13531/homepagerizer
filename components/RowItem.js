@@ -1,9 +1,16 @@
 import Tooltip from "rc-tooltip";
-import { useState } from "react";
-import { deleteItem, updateItem, addItemBefore } from "../misc/action_creators";
+import { useState, useEffect } from "react";
+import {
+  deleteItem,
+  updateItem,
+  addItemBefore,
+  setItemIdListeningForHotkey,
+  setLastPressedHotkey,
+} from "../misc/action_creators";
 
 export default function RowItem({ item, itemNum, rowNum, dispatch }) {
-  const { text, url, keyboardShortcut } = item;
+  const { text, url, keyboardShortcut, id } = item;
+  const { lastPressedHotkey } = state;
   const [inputUrl, setInputUrl] = useState(url);
   const [inputText, setInputText] = useState(text);
   const [inputKeyboardShortcut, setInputKeyboardShortcut] = useState(
@@ -16,19 +23,42 @@ export default function RowItem({ item, itemNum, rowNum, dispatch }) {
     }
   };
 
-  const updateValues = () => {
+  const updateValues = (shortcutOverride = inputKeyboardShortcut) => {
     dispatch(
       updateItem(rowNum, itemNum, {
         text: inputText,
         url: inputUrl,
-        keyboardShortcut: inputKeyboardShortcut,
+        keyboardShortcut: shortcutOverride,
       })
     );
   };
 
-  const keyboardShortcutText = _.isNil(keyboardShortcut)
+  let keyboardShortcutText = _.isNil(keyboardShortcut)
     ? "(unset)"
     : keyboardShortcut;
+
+  const isThisItemListeningForHotkey = state.itemIdListeningForHotkey === id;
+
+  if (isThisItemListeningForHotkey) {
+    keyboardShortcutText = "Listening...";
+  }
+
+  useEffect(() => {
+    if (_.isNil(lastPressedHotkey) || !isThisItemListeningForHotkey) {
+      return;
+    }
+
+    // Backspace clears the hotkey
+    const realHotkey =
+      lastPressedHotkey === "Backspace" ? null : lastPressedHotkey;
+
+    // Clear the last-pressed hotkey and the item requesting that hotkey.
+    dispatch(setItemIdListeningForHotkey(null));
+    dispatch(setLastPressedHotkey(null));
+
+    setInputKeyboardShortcut(realHotkey);
+    updateValues(realHotkey);
+  }, [lastPressedHotkey, isThisItemListeningForHotkey]);
 
   const tooltipOverlay = (
     <div className="flex flex-col">
@@ -59,8 +89,11 @@ export default function RowItem({ item, itemNum, rowNum, dispatch }) {
         <button
           className="border-2"
           onClick={() => {
-            setLocallyListeningforHotkey(!listeningForHotkey);
-            setListeningForHotkey(!listeningForHotkey);
+            dispatch(
+              setItemIdListeningForHotkey(
+                isThisItemListeningForHotkey ? null : id
+              )
+            );
           }}
         >
           {keyboardShortcutText}

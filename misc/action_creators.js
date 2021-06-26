@@ -44,3 +44,11 @@ export function deleteItem(rowNum, itemNum) {
     itemNum,
   };
 }
+
+export function setItemIdListeningForHotkey(itemId) {
+  return { type: actions.SET_LISTENING_FOR_HOTKEY, itemId };
+}
+
+export function setLastPressedHotkey(value) {
+  return { type: actions.SET_LAST_PRESSED_HOTKEY, value };
+}

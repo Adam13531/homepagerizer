@@ -7,6 +7,8 @@ const actions = createEnum([
   "ADD_ITEM_BEFORE",
   "UPDATE_ITEM",
   "DELETE_ITEM",
+  "SET_LISTENING_FOR_HOTKEY",
+  "SET_LAST_PRESSED_HOTKEY",
 ]);
 
 export default actions;
