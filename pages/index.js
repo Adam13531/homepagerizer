@@ -7,6 +7,7 @@ import useKeyboardListener from "../misc/useKeyboardListener";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import ColorPickers from "../components/ColorPickers";
+import Preview from "../components/Preview";
 
 import "tailwindcss/tailwind.css";
 import "rc-tooltip/assets/bootstrap.css";
@@ -51,6 +52,7 @@ export default function Home() {
         <DndProvider backend={HTML5Backend}>
           <Rows state={state} dispatch={dispatch} />
           <ColorPickers state={state} dispatch={dispatch} />
+          <Preview state={state} />
           <ToastContainer
             position="top-left"
             autoClose={5000}
