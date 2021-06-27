@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import {
   setItemIdListeningForHotkey,
   setLastPressedHotkey,
-} from "./action_creators";
+} from "../misc/action_creators";
 
 /**
  * These are hotkeys that can't be used to activate links.

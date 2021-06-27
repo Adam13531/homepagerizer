@@ -2,7 +2,7 @@ import Tooltip from "rc-tooltip";
 import { useState } from "react";
 import { deleteItem, updateItem, addItemBefore } from "../misc/action_creators";
 import KeyboardShortcutButton from "./KeyboardShortcutButton";
-import useDragAndDropItem from "../misc/useDragAndDropItem";
+import useDragAndDropItem from "../hooks/useDragAndDropItem";
 import classNames from "classnames";
 
 export default function RowItem({ item, itemNum, rowNum, dispatch }) {

@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import { useDrag, useDrop } from "react-dnd";
-import { deleteItem, addItemBefore, updateItem } from "./action_creators";
+import { deleteItem, addItemBefore, updateItem } from "../misc/action_creators";
 
 /**
  * Get an item's coordinates (its row and item indices).

@@ -1,7 +1,10 @@
 import { useEffect } from "react";
 import _ from "lodash";
-import { setHomepagerizerAddress, loadSavedState } from "./action_creators";
-import { getStateFromJson } from "./parseHtml";
+import {
+  setHomepagerizerAddress,
+  loadSavedState,
+} from "../misc/action_creators";
+import { getStateFromJson } from "../misc/parseHtml";
 
 /**
  * Hook that acts on the URL bar on first use (e.g. to store the host address
