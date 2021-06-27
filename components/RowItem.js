@@ -4,12 +4,13 @@ import KeyboardShortcutButton from "./KeyboardShortcutButton";
 import useDragAndDropItem from "../hooks/useDragAndDropItem";
 import classNames from "classnames";
 import { useDispatch } from "react-redux";
-import { updateItem, deleteItem, addItemBefore } from "../state/contentSlice";
+import { updateItem, addItemBefore } from "../state/contentSlice";
+import { deleteItem } from "../state/actions";
 
 export default function RowItem({ item, itemNum, rowNum }) {
   const dispatch = useDispatch();
 
-  const { text, url, keyboardShortcut } = item;
+  const { text, url, keyboardShortcut, id } = item;
   const [inputUrl, setInputUrl] = useState(url);
   const [inputText, setInputText] = useState(text);
 
@@ -71,7 +72,7 @@ export default function RowItem({ item, itemNum, rowNum }) {
         <button onClick={() => updateValues()}>Update</button>
       </div>
       <div>
-        <button onClick={() => dispatch(deleteItem(rowNum, itemNum))}>
+        <button onClick={() => dispatch(deleteItem(rowNum, itemNum, id))}>
           ❌ Delete
         </button>
       </div>

@@ -1,12 +1,8 @@
 import { useCallback } from "react";
 import { useDrag, useDrop } from "react-dnd";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  selectRows,
-  deleteItem,
-  addItemBefore,
-  updateItem,
-} from "../state/contentSlice";
+import { selectRows, addItemBefore, updateItem } from "../state/contentSlice";
+import { deleteItem } from "../state/actions";
 
 /**
  * Get an item's coordinates (its row and item indices).
@@ -41,7 +37,7 @@ export default function useDragAndDropItem(itemNum, rowNum) {
       const sourceItem = rows[rowNum][itemNum];
       const targetItem = rows[targetRowNum][targetItemNum];
 
-      dispatch(deleteItem(rowNum, itemNum));
+      dispatch(deleteItem(rowNum, itemNum, sourceItem.id));
 
       // Deleting the source item may have changed the item number of the target,
       // so we fetch the current values.

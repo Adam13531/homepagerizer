@@ -2,12 +2,12 @@ import { useEffect } from "react";
 import _ from "lodash";
 import { toast } from "react-toastify";
 import { useSelector, useDispatch } from "react-redux";
+import { selectRows } from "../state/contentSlice";
 import {
   setItemIdListeningForHotkey,
   setLastPressedHotkey,
   selectItemIdListeningForHotkey,
-  selectRows,
-} from "../state/contentSlice";
+} from "../state/keyboardSlice";
 
 /**
  * These are hotkeys that can't be used to activate links.

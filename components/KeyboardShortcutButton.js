@@ -5,7 +5,7 @@ import {
   selectLastPressedHotkey,
   setLastPressedHotkey,
   setItemIdListeningForHotkey,
-} from "../state/contentSlice";
+} from "../state/keyboardSlice";
 
 /**
  * A button that knows how to listen to a keyboard shortcut and update the item
