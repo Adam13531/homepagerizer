@@ -1,5 +1,6 @@
 import Head from "next/head";
 import Rows from "../components/Rows";
+import HTMLDropzone from "../components/HTMLDropzone";
 import reducer from "../misc/reducer";
 import { useReducer } from "react";
 import { ToastContainer } from "react-toastify";
@@ -51,6 +52,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
+        <HTMLDropzone dispatch={dispatch} />
         <DndProvider backend={HTML5Backend}>
           <Rows state={state} dispatch={dispatch} />
           <ColorPickers state={state} dispatch={dispatch} />
