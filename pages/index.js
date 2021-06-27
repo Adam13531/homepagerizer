@@ -10,6 +10,8 @@ import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import ColorPickers from "../components/ColorPickers";
 import Preview from "../components/Preview";
+import store from "../state/store";
+import { Provider } from "react-redux";
 
 import "tailwindcss/tailwind.css";
 import "rc-tooltip/assets/bootstrap.css";
@@ -17,12 +19,6 @@ import "react-toastify/dist/ReactToastify.css";
 
 const initialState = {
   rows: [],
-
-  bgColor: "#ffffff",
-  textColor: "#000000",
-  linkColor: "#3275f4",
-  accentColor: "#4100ff",
-  hoverColor: "#e7e7e7",
 
   /**
    * If this is null, no items are listening for a hotkey. Otherwise, it's the
@@ -51,20 +47,23 @@ export default function Home() {
         <title>Homepagerizer</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main>
-        <HTMLDropzone dispatch={dispatch} />
-        <DndProvider backend={HTML5Backend}>
-          <Rows state={state} dispatch={dispatch} />
-          <ColorPickers state={state} dispatch={dispatch} />
-          <Preview state={state} />
-          <ToastContainer
-            position="top-left"
-            autoClose={5000}
-            closeOnClick
-            pauseOnHover
-          />
-        </DndProvider>
-      </main>
+
+      <Provider store={store}>
+        <main>
+          <HTMLDropzone dispatch={dispatch} />
+          <DndProvider backend={HTML5Backend}>
+            <Rows state={state} dispatch={dispatch} />
+            <ColorPickers />
+            <Preview state={state} />
+            <ToastContainer
+              position="top-left"
+              autoClose={5000}
+              closeOnClick
+              pauseOnHover
+            />
+          </DndProvider>
+        </main>
+      </Provider>
     </div>
   );
 }

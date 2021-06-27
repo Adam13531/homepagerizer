@@ -22,16 +22,6 @@ export default function reducer(state, action) {
       return { ...state, itemIdListeningForHotkey: action.itemId };
     case actions.SET_LAST_PRESSED_HOTKEY:
       return { ...state, lastPressedHotkey: action.value };
-    case actions.SET_BG_COLOR:
-      return { ...state, bgColor: action.value };
-    case actions.SET_TEXT_COLOR:
-      return { ...state, textColor: action.value };
-    case actions.SET_LINK_COLOR:
-      return { ...state, linkColor: action.value };
-    case actions.SET_ACCENT_COLOR:
-      return { ...state, accentColor: action.value };
-    case actions.SET_HOVER_COLOR:
-      return { ...state, hoverColor: action.value };
     case actions.DELETE_ROW: {
       const { rowNum } = action;
       return {

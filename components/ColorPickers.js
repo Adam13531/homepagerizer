@@ -1,45 +1,53 @@
 import ColorPickerPopup from "./ColorPickerPopup";
+import { useSelector, useDispatch } from "react-redux";
+
 import {
   setBgColor,
   setTextColor,
   setLinkColor,
   setAccentColor,
   setHoverColor,
-} from "../misc/action_creators";
+  selectAllColors,
+} from "../state/colorsSlice";
 
-export default function ColorPickers({ state, dispatch }) {
+export default function ColorPickers({}) {
+  const { bgColor, textColor, linkColor, accentColor, hoverColor } =
+    useSelector(selectAllColors);
+
+  const dispatch = useDispatch();
+
   return (
     <div className="space-x-2">
       <ColorPickerPopup
-        color={state.bgColor}
+        color={bgColor}
         text="Background color"
         onChange={(color) => {
           dispatch(setBgColor(color.hex));
         }}
       />
       <ColorPickerPopup
-        color={state.linkColor}
+        color={linkColor}
         text="Link color"
         onChange={(color) => {
           dispatch(setLinkColor(color.hex));
         }}
       />
       <ColorPickerPopup
-        color={state.textColor}
+        color={textColor}
         text="Text color"
         onChange={(color) => {
           dispatch(setTextColor(color.hex));
         }}
       />
       <ColorPickerPopup
-        color={state.accentColor}
+        color={accentColor}
         text="Accent color"
         onChange={(color) => {
           dispatch(setAccentColor(color.hex));
         }}
       />
       <ColorPickerPopup
-        color={state.hoverColor}
+        color={hoverColor}
         text="Hover color"
         onChange={(color) => {
           dispatch(setHoverColor(color.hex));

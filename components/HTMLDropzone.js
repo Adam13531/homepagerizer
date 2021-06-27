@@ -1,12 +1,14 @@
 import { useDropzone } from "react-dropzone";
 import classNames from "classnames";
 import { useState, useEffect } from "react";
-import { loadSavedState } from "../misc/action_creators";
+import { loadSavedState } from "../state/actions";
 import { parseHtml } from "../misc/parseHtml";
+import { useDispatch } from "react-redux";
 
-export default function HTMLDropzone({ dispatch }) {
+export default function HTMLDropzone({}) {
   const [isDragging, setIsDragging] = useState(false);
 
+  const dispatch = useDispatch();
   const onImport = (str) => {
     dispatch(loadSavedState(parseHtml(str)));
   };
