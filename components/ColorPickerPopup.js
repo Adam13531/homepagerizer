@@ -29,7 +29,12 @@ export default function ColorPickerPopup({ onChange, color, text }) {
       {displayColorPicker ? (
         <div style={popover}>
           <div style={cover} onClick={handleClose} />
-          <SketchPicker disableAlpha={true} color={color} onChange={onChange} />
+          <SketchPicker
+            presetColors={[]}
+            disableAlpha={true}
+            color={color}
+            onChange={onChange}
+          />
         </div>
       ) : null}
     </span>
