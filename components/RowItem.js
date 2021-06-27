@@ -1,21 +1,17 @@
 import Tooltip from "rc-tooltip";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import {
   deleteItem,
   updateItem,
   addItemBefore,
   setItemIdListeningForHotkey,
-  setLastPressedHotkey,
 } from "../misc/action_creators";
+import KeyboardShortcutButton from "./KeyboardShortcutButton";
 
 export default function RowItem({ item, itemNum, rowNum, dispatch }) {
   const { text, url, keyboardShortcut, id } = item;
-  const { lastPressedHotkey } = state;
   const [inputUrl, setInputUrl] = useState(url);
   const [inputText, setInputText] = useState(text);
-  const [inputKeyboardShortcut, setInputKeyboardShortcut] = useState(
-    item.keyboardShortcut
-  );
 
   const handleSubmit = (e) => {
     if (e.key === "Enter") {
@@ -23,7 +19,7 @@ export default function RowItem({ item, itemNum, rowNum, dispatch }) {
     }
   };
 
-  const updateValues = (shortcutOverride = inputKeyboardShortcut) => {
+  const updateValues = (shortcutOverride = keyboardShortcut) => {
     dispatch(
       updateItem(rowNum, itemNum, {
         text: inputText,
@@ -33,32 +29,9 @@ export default function RowItem({ item, itemNum, rowNum, dispatch }) {
     );
   };
 
-  let keyboardShortcutText = _.isNil(keyboardShortcut)
-    ? "(unset)"
-    : keyboardShortcut;
-
-  const isThisItemListeningForHotkey = state.itemIdListeningForHotkey === id;
-
-  if (isThisItemListeningForHotkey) {
-    keyboardShortcutText = "Listening...";
-  }
-
-  useEffect(() => {
-    if (_.isNil(lastPressedHotkey) || !isThisItemListeningForHotkey) {
-      return;
-    }
-
-    // Backspace clears the hotkey
-    const realHotkey =
-      lastPressedHotkey === "Backspace" ? null : lastPressedHotkey;
-
-    // Clear the last-pressed hotkey and the item requesting that hotkey.
-    dispatch(setItemIdListeningForHotkey(null));
-    dispatch(setLastPressedHotkey(null));
-
-    setInputKeyboardShortcut(realHotkey);
-    updateValues(realHotkey);
-  }, [lastPressedHotkey, isThisItemListeningForHotkey]);
+  const updateKeyboardShortcut = (newShortcut) => {
+    updateValues(newShortcut);
+  };
 
   const tooltipOverlay = (
     <div className="flex flex-col">
@@ -86,18 +59,12 @@ export default function RowItem({ item, itemNum, rowNum, dispatch }) {
       </div>
       <div>
         Keyboard shortcut:{" "}
-        <button
-          className="border-2"
-          onClick={() => {
-            dispatch(
-              setItemIdListeningForHotkey(
-                isThisItemListeningForHotkey ? null : id
-              )
-            );
-          }}
-        >
-          {keyboardShortcutText}
-        </button>
+        <KeyboardShortcutButton
+          state={state}
+          dispatch={dispatch}
+          item={item}
+          onUpdateKeyboardShortcut={updateKeyboardShortcut}
+        />
       </div>
       <div>
         <button onClick={updateValues}>Update</button>
