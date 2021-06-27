@@ -2,12 +2,7 @@ import _ from "lodash";
 import Row from "./Row";
 import RowItem from "./RowItem";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  addRow,
-  deleteRow,
-  addItemAtEndOfRow,
-  selectRows,
-} from "../state/contentSlice";
+import { addRow, selectRows } from "../state/contentSlice";
 
 export default function Rows() {
   const rows = useSelector(selectRows);
@@ -17,11 +12,7 @@ export default function Rows() {
   return (
     <>
       {_.map(rows, (row, rowNum) => (
-        <Row
-          key={rowNum}
-          onAddItem={() => dispatch(addItemAtEndOfRow(rowNum))}
-          onDelete={() => dispatch(deleteRow(rowNum))}
-        >
+        <Row key={rowNum} rowNum={rowNum}>
           {_.map(row, (item, itemNum) => {
             return (
               <RowItem
