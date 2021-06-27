@@ -14,6 +14,8 @@ const actions = createEnum([
   "SET_LINK_COLOR",
   "SET_ACCENT_COLOR",
   "SET_HOVER_COLOR",
+  "SET_HOMEPAGERIZER_ADDRESS",
+  "LOAD_SAVED_STATE",
 ]);
 
 export default actions;

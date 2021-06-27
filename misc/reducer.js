@@ -12,6 +12,10 @@ function makeNewTextItem() {
 
 export default function reducer(state, action) {
   switch (action.type) {
+    case actions.SET_HOMEPAGERIZER_ADDRESS:
+      return { ...state, homepagerizerAddress: action.value };
+    case actions.LOAD_SAVED_STATE:
+      return { ...state, ...action.state };
     case actions.ADD_ROW:
       return { ...state, rows: [...state.rows, []] };
     case actions.SET_LISTENING_FOR_HOTKEY:

@@ -4,6 +4,7 @@ import reducer from "../misc/reducer";
 import { useReducer } from "react";
 import { ToastContainer } from "react-toastify";
 import useKeyboardListener from "../misc/useKeyboardListener";
+import useUrlEffects from "../misc/useUrlEffects";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import ColorPickers from "../components/ColorPickers";
@@ -40,6 +41,7 @@ const initialState = {
 export default function Home() {
   const [state, dispatch] = useReducer(reducer, initialState);
 
+  useUrlEffects(dispatch);
   useKeyboardListener(state, dispatch);
 
   return (

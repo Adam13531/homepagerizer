@@ -68,3 +68,11 @@ export function setAccentColor(value) {
 export function setHoverColor(value) {
   return { type: actions.SET_HOVER_COLOR, value };
 }
+
+export function loadSavedState(state) {
+  return { type: actions.LOAD_SAVED_STATE, state };
+}
+
+export function setHomepagerizerAddress(value) {
+  return { type: actions.SET_HOMEPAGERIZER_ADDRESS, value };
+}
