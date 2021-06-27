@@ -21,6 +21,7 @@ export default function Rows({ state, dispatch }) {
                 item={item}
                 itemNum={itemNum}
                 rowNum={rowNum}
+                state={state}
                 dispatch={dispatch}
               />
             );

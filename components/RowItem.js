@@ -5,7 +5,7 @@ import KeyboardShortcutButton from "./KeyboardShortcutButton";
 import useDragAndDropItem from "../hooks/useDragAndDropItem";
 import classNames from "classnames";
 
-export default function RowItem({ item, itemNum, rowNum, dispatch }) {
+export default function RowItem({ item, itemNum, rowNum, state, dispatch }) {
   const { text, url, keyboardShortcut } = item;
   const [inputUrl, setInputUrl] = useState(url);
   const [inputText, setInputText] = useState(text);
