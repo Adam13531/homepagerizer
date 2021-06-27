@@ -31,9 +31,6 @@ export default function useDragAndDropItem(itemNum, rowNum, state, dispatch) {
         return;
       }
 
-      console.log(
-        `Moving ${rowNum}, ${itemNum} → ${targetRowNum}, ${targetItemNum}`
-      );
       const sourceItem = rows[rowNum][itemNum];
       const targetItem = rows[targetRowNum][targetItemNum];
 
