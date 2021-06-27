@@ -6,6 +6,7 @@ import { ToastContainer } from "react-toastify";
 import useKeyboardListener from "../misc/useKeyboardListener";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
+import ColorPickers from "../components/ColorPickers";
 
 import "tailwindcss/tailwind.css";
 import "rc-tooltip/assets/bootstrap.css";
@@ -13,6 +14,12 @@ import "react-toastify/dist/ReactToastify.css";
 
 const initialState = {
   rows: [],
+
+  bgColor: "#ffffff",
+  textColor: "#000000",
+  linkColor: "#3275f4",
+  accentColor: "#4100ff",
+  hoverColor: "#e7e7e7",
 
   /**
    * If this is null, no items are listening for a hotkey. Otherwise, it's the
@@ -42,13 +49,14 @@ export default function Home() {
       </Head>
       <main>
         <DndProvider backend={HTML5Backend}>
-        <Rows state={state} dispatch={dispatch} />
-        <ToastContainer
-          position="top-left"
-          autoClose={5000}
-          closeOnClick
-          pauseOnHover
-        />
+          <Rows state={state} dispatch={dispatch} />
+          <ColorPickers state={state} dispatch={dispatch} />
+          <ToastContainer
+            position="top-left"
+            autoClose={5000}
+            closeOnClick
+            pauseOnHover
+          />
         </DndProvider>
       </main>
     </div>

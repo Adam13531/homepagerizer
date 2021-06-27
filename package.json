@@ -16,6 +16,7 @@
     "next": "^10.0.0",
     "rc-tooltip": "5.1.1",
     "react": "17.0.1",
+    "react-color": "2.19.3",
     "react-dnd": "14.0.2",
     "react-dnd-html5-backend": "14.0.0",
     "react-dom": "17.0.1",

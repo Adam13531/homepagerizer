@@ -52,3 +52,19 @@ export function setItemIdListeningForHotkey(itemId) {
 export function setLastPressedHotkey(value) {
   return { type: actions.SET_LAST_PRESSED_HOTKEY, value };
 }
+
+export function setBgColor(value) {
+  return { type: actions.SET_BG_COLOR, value };
+}
+export function setTextColor(value) {
+  return { type: actions.SET_TEXT_COLOR, value };
+}
+export function setLinkColor(value) {
+  return { type: actions.SET_LINK_COLOR, value };
+}
+export function setAccentColor(value) {
+  return { type: actions.SET_ACCENT_COLOR, value };
+}
+export function setHoverColor(value) {
+  return { type: actions.SET_HOVER_COLOR, value };
+}
