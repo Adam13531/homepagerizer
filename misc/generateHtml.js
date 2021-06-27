@@ -1,5 +1,5 @@
 import _ from "lodash";
-import { homepageVersion } from "../package.json";
+import packageJson from "../package.json";
 
 /**
  * Form an HTML string representing a link in such a way that its keyboard
@@ -117,7 +117,7 @@ table {
     ...state,
 
     // Add in the homepageVersion
-    homepageVersion,
+    homepageVersion: packageJson.homepageVersion,
   };
 
   delete jsonData.selectedItem;
