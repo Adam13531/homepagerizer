@@ -1,6 +1,9 @@
 {
   "name": "homepagerizer",
   "version": "0.1.0",
+  "author": {
+    "name": "Adam13531"
+  },
   "private": true,
   "scripts": {
     "dev": "next dev",
