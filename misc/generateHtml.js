@@ -46,7 +46,8 @@ function getLinkTextGivenShortcut(text, keyboardShortcut) {
  */
 export default function generateHtml(state, { showEditButton = true }) {
   let content = "";
-  const { rows } = state;
+  const { rows, accentColor, bgColor, hoverColor, linkColor, textColor } =
+    state;
   _.forEach(rows, (row) => {
     let rowElements = "";
     if (row.length === 0) {
@@ -70,28 +71,28 @@ export default function generateHtml(state, { showEditButton = true }) {
 
   let style = `
 body {
-  background-color: ${state.bgColor};
-  color: ${state.textColor}
+  background-color: ${bgColor};
+  color: ${textColor}
 }
 
 a {
-  color: ${state.linkColor};
+  color: ${linkColor};
 }
 
 a:active {
-  color: ${state.linkColor};
+  color: ${linkColor};
 }
 
 a:visited {
-  color: ${state.linkColor};
+  color: ${linkColor};
 }
 
 a:hover {
-  background-color: ${state.hoverColor};
+  background-color: ${hoverColor};
 }
 
 .shortcut {
-  color: ${state.accentColor};
+  color: ${accentColor};
   font-weight: bold;
 }
 
@@ -100,9 +101,9 @@ table {
 }
 
 #edit {
-  background-color: ${state.bgColor};
-  border-color: ${state.accentColor};
-  color: ${state.linkColor};
+  background-color: ${bgColor};
+  border-color: ${accentColor};
+  color: ${linkColor};
 }
 `;
 

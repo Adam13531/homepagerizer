@@ -1,6 +1,12 @@
 import { useCallback } from "react";
 import { useDrag, useDrop } from "react-dnd";
-import { deleteItem, addItemBefore, updateItem } from "../misc/action_creators";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  selectRows,
+  deleteItem,
+  addItemBefore,
+  updateItem,
+} from "../state/contentSlice";
 
 /**
  * Get an item's coordinates (its row and item indices).
@@ -20,8 +26,9 @@ function getCoordinatesOfItemById(rows, itemId) {
   return null;
 }
 
-export default function useDragAndDropItem(itemNum, rowNum, state, dispatch) {
-  const { rows } = state;
+export default function useDragAndDropItem(itemNum, rowNum) {
+  const dispatch = useDispatch();
+  const rows = useSelector(selectRows);
 
   const onRelocateItem = useCallback(
     (rowNum, itemNum, targetRowNum, targetItemNum) => {

@@ -1,16 +1,15 @@
 import { useEffect } from "react";
 import _ from "lodash";
-import {
-  setHomepagerizerAddress,
-  loadSavedState,
-} from "../misc/action_creators";
-import { getStateFromJson } from "../misc/parseHtml";
+import { useDispatch } from "react-redux";
+import { setHomepagerizerAddress } from "../state/contentSlice";
+import { loadSavedState } from "../state/actions";
 
 /**
  * Hook that acts on the URL bar on first use (e.g. to store the host address
  * and to parse query params).
  */
-export default function useUrlEffects(dispatch) {
+export default function useUrlEffects() {
+  const dispatch = useDispatch();
   useEffect(() => {
     const homepagerizerAddress = `${location.protocol}//${location.host}`;
     dispatch(setHomepagerizerAddress(homepagerizerAddress));
@@ -21,7 +20,7 @@ export default function useUrlEffects(dispatch) {
     if (!_.isNil(base64Json)) {
       const jsonStr = atob(base64Json);
       const jsonObj = JSON.parse(jsonStr);
-      dispatch(loadSavedState(getStateFromJson(jsonObj)));
+      dispatch(loadSavedState(jsonObj));
     }
   }, []);
 }

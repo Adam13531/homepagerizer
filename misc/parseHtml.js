@@ -1,29 +1,6 @@
 import _ from "lodash";
 
 /**
- * Given an object representing a superset of the desired state for our
- * application, this will prune the extra parameters out.
- *
- * For an example of WHY we want this: we save homepagerizerAddress into the
- * resulting homepage so that we know which URL to navigate to on edit, but
- * suppose that URL redirected us elsewhere; we would want the new page to
- * overwrite that address.
- * @param {Object} jsonObject
- * @return {Object}
- */
-export function getStateFromJson(jsonObject) {
-  const pathsToKeep = [
-    "rows",
-    "bgColor",
-    "textColor",
-    "linkColor",
-    "accentColor",
-    "hoverColor",
-  ];
-  return _.pick(jsonObject, pathsToKeep);
-}
-
-/**
  * @param {string} html - a string representing the lines of HTML
  * @return {Object} state
  */
@@ -45,5 +22,5 @@ export function parseHtml(html) {
   }
 
   const json = JSON.parse(jsonStr);
-  return getStateFromJson(json);
+  return json;
 }

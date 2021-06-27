@@ -1,4 +1,4 @@
-import { createSlice, createAction } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import { loadSavedState } from "./actions";
 
 const reducerName = "colors";
@@ -49,7 +49,5 @@ export const {
 } = slice.actions;
 
 export const selectAllColors = (state) => state[reducerName];
-
-export const loadAction = createAction("global/load");
 
 export default slice.reducer;

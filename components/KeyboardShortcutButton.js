@@ -1,8 +1,11 @@
 import { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import {
-  setItemIdListeningForHotkey,
+  selectItemIdListeningForHotkey,
+  selectLastPressedHotkey,
   setLastPressedHotkey,
-} from "../misc/action_creators";
+  setItemIdListeningForHotkey,
+} from "../state/contentSlice";
 
 /**
  * A button that knows how to listen to a keyboard shortcut and update the item
@@ -11,10 +14,11 @@ import {
 export default function KeyboardShortcutButton({
   item,
   onUpdateKeyboardShortcut,
-  state,
-  dispatch,
 }) {
-  const { itemIdListeningForHotkey, lastPressedHotkey } = state;
+  const dispatch = useDispatch();
+
+  const itemIdListeningForHotkey = useSelector(selectItemIdListeningForHotkey);
+  const lastPressedHotkey = useSelector(selectLastPressedHotkey);
   const { keyboardShortcut, id } = item;
   const isThisItemListeningForHotkey = itemIdListeningForHotkey === id;
 

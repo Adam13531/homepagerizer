@@ -3,13 +3,15 @@ import { saveAs } from "file-saver";
 import debounceRender from "react-debounce-render";
 import { useSelector } from "react-redux";
 import { selectAllColors } from "../state/colorsSlice";
+import { selectRows, selectHomepagerizerAddress } from "../state/contentSlice";
 
-function Preview({ state }) {
-  // Currently, the state is split between Redux Toolkit and React, so we
-  // combine it here.
+function Preview() {
   const allColors = useSelector(selectAllColors);
-  state = {
-    ...state,
+  const rows = useSelector(selectRows);
+  const homepagerizerAddress = useSelector(selectHomepagerizerAddress);
+  const state = {
+    rows,
+    homepagerizerAddress,
     ...allColors,
   };
 

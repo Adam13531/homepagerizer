@@ -1,11 +1,14 @@
 import Tooltip from "rc-tooltip";
 import { useState } from "react";
-import { deleteItem, updateItem, addItemBefore } from "../misc/action_creators";
 import KeyboardShortcutButton from "./KeyboardShortcutButton";
 import useDragAndDropItem from "../hooks/useDragAndDropItem";
 import classNames from "classnames";
+import { useDispatch } from "react-redux";
+import { updateItem, deleteItem, addItemBefore } from "../state/contentSlice";
 
-export default function RowItem({ item, itemNum, rowNum, state, dispatch }) {
+export default function RowItem({ item, itemNum, rowNum }) {
+  const dispatch = useDispatch();
+
   const { text, url, keyboardShortcut } = item;
   const [inputUrl, setInputUrl] = useState(url);
   const [inputText, setInputText] = useState(text);
@@ -31,7 +34,7 @@ export default function RowItem({ item, itemNum, rowNum, state, dispatch }) {
   };
 
   const [attachBothDragAndDropRefs, isDraggingAnywhere, isDraggingOver] =
-    useDragAndDropItem(itemNum, rowNum, state, dispatch);
+    useDragAndDropItem(itemNum, rowNum);
 
   const tooltipOverlay = (
     <div className="flex flex-col">
@@ -60,8 +63,6 @@ export default function RowItem({ item, itemNum, rowNum, state, dispatch }) {
       <div>
         Keyboard shortcut:{" "}
         <KeyboardShortcutButton
-          state={state}
-          dispatch={dispatch}
           item={item}
           onUpdateKeyboardShortcut={updateKeyboardShortcut}
         />
