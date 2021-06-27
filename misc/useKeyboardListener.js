@@ -44,6 +44,10 @@ function getItemUsingKeyboardShortcut(state, keyboardShortcut) {
   return null;
 }
 
+/**
+ * Hook to install keyboard listeners on the entire window that can be used to
+ * set up hotkeys for items. Only one item can have its hotkey set at a time.
+ */
 export default function useKeyboardListener(state, dispatch) {
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -55,6 +59,8 @@ export default function useKeyboardListener(state, dispatch) {
       }
 
       e.preventDefault();
+
+      // Pressing escape bails out of setting a hotkey.
       if (key === "Escape") {
         dispatch(setItemIdListeningForHotkey(null));
         return;
@@ -65,11 +71,15 @@ export default function useKeyboardListener(state, dispatch) {
         return;
       }
 
+      // Ensure no other items are using this shortcut.
       const itemUsingKeyboardShortcut = getItemUsingKeyboardShortcut(
         state,
         key
       );
-      if (!_.isNil(itemUsingKeyboardShortcut)) {
+      if (
+        !_.isNil(itemUsingKeyboardShortcut) &&
+        itemUsingKeyboardShortcut.id !== state.itemIdListeningForHotkey
+      ) {
         toast(
           `${key} is already in use by "${itemUsingKeyboardShortcut.text}"; press another keyboard key or escape to cancel.`,
           {
