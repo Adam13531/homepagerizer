@@ -67,7 +67,7 @@ export default function RowItem({ item, itemNum, rowNum, dispatch }) {
         />
       </div>
       <div>
-        <button onClick={updateValues}>Update</button>
+        <button onClick={() => updateValues()}>Update</button>
       </div>
       <div>
         <button onClick={() => dispatch(deleteItem(rowNum, itemNum))}>
