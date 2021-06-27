@@ -4,6 +4,8 @@ import reducer from "../misc/reducer";
 import { useReducer } from "react";
 import { ToastContainer } from "react-toastify";
 import useKeyboardListener from "../misc/useKeyboardListener";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
 
 import "tailwindcss/tailwind.css";
 import "rc-tooltip/assets/bootstrap.css";
@@ -39,6 +41,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
+        <DndProvider backend={HTML5Backend}>
         <Rows state={state} dispatch={dispatch} />
         <ToastContainer
           position="top-left"
@@ -46,6 +49,7 @@ export default function Home() {
           closeOnClick
           pauseOnHover
         />
+        </DndProvider>
       </main>
     </div>
   );

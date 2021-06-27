@@ -1,15 +1,12 @@
 import Tooltip from "rc-tooltip";
 import { useState } from "react";
-import {
-  deleteItem,
-  updateItem,
-  addItemBefore,
-  setItemIdListeningForHotkey,
-} from "../misc/action_creators";
+import { deleteItem, updateItem, addItemBefore } from "../misc/action_creators";
 import KeyboardShortcutButton from "./KeyboardShortcutButton";
+import useDragAndDropItem from "../misc/useDragAndDropItem";
+import classNames from "classnames";
 
 export default function RowItem({ item, itemNum, rowNum, dispatch }) {
-  const { text, url, keyboardShortcut, id } = item;
+  const { text, url, keyboardShortcut } = item;
   const [inputUrl, setInputUrl] = useState(url);
   const [inputText, setInputText] = useState(text);
 
@@ -32,6 +29,9 @@ export default function RowItem({ item, itemNum, rowNum, dispatch }) {
   const updateKeyboardShortcut = (newShortcut) => {
     updateValues(newShortcut);
   };
+
+  const [attachBothDragAndDropRefs, isDraggingAnywhere, isDraggingOver] =
+    useDragAndDropItem(itemNum, rowNum, state, dispatch);
 
   const tooltipOverlay = (
     <div className="flex flex-col">
@@ -77,6 +77,12 @@ export default function RowItem({ item, itemNum, rowNum, dispatch }) {
     </div>
   );
 
+  const itemCss = classNames({
+    "text-blue-500": true,
+    "cursor-pointer": true,
+    "border-2": isDraggingOver,
+  });
+
   return (
     <span className="space-x-2">
       <button onClick={() => dispatch(addItemBefore(rowNum, itemNum))}>
@@ -85,13 +91,16 @@ export default function RowItem({ item, itemNum, rowNum, dispatch }) {
       <Tooltip
         placement={"bottom"}
         mouseLeaveDelay={0.2}
+        overlayInnerStyle={isDraggingAnywhere ? { display: "none" } : {}}
         overlay={tooltipOverlay}
         align={{
           offset: [0, 0],
         }}
         transitionName=""
       >
-        <span className="text-blue-500 cursor-pointer">{text}</span>
+        <span ref={attachBothDragAndDropRefs} className={itemCss}>
+          {text}
+        </span>
       </Tooltip>
     </span>
   );
