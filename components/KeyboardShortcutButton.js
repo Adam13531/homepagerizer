@@ -6,15 +6,13 @@ import {
   setLastPressedHotkey,
   setItemIdListeningForHotkey,
 } from "../state/keyboardSlice";
+import { updateItem } from "../state/contentSlice";
 
 /**
  * A button that knows how to listen to a keyboard shortcut and update the item
  * that this belongs to.
  */
-export default function KeyboardShortcutButton({
-  item,
-  onUpdateKeyboardShortcut,
-}) {
+export default function KeyboardShortcutButton({ item, rowNum, itemNum }) {
   const dispatch = useDispatch();
 
   const itemIdListeningForHotkey = useSelector(selectItemIdListeningForHotkey);
@@ -35,7 +33,11 @@ export default function KeyboardShortcutButton({
     dispatch(setItemIdListeningForHotkey(null));
     dispatch(setLastPressedHotkey(null));
 
-    onUpdateKeyboardShortcut(realHotkey);
+    dispatch(
+      updateItem(rowNum, itemNum, {
+        keyboardShortcut: realHotkey,
+      })
+    );
   }, [lastPressedHotkey, isThisItemListeningForHotkey]);
 
   let keyboardShortcutText = _.isNil(keyboardShortcut)

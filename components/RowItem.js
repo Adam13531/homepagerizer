@@ -1,5 +1,4 @@
 import Tooltip from "rc-tooltip";
-import { useState } from "react";
 import KeyboardShortcutButton from "./KeyboardShortcutButton";
 import useDragAndDropItem from "../hooks/useDragAndDropItem";
 import classNames from "classnames";
@@ -8,34 +7,10 @@ import { updateItem, addItemBefore } from "../state/contentSlice";
 import { deleteItem } from "../state/actions";
 import Checkbox from "rc-checkbox";
 
-export default function RowItem({ item, itemNum, rowNum, isSmallText }) {
+export default function RowItem({ item, itemNum, rowNum }) {
   const dispatch = useDispatch();
 
-  const { text, url, keyboardShortcut, id } = item;
-  const [inputIsSmallText, setInputIsSmallText] = useState(isSmallText);
-  const [inputUrl, setInputUrl] = useState(url);
-  const [inputText, setInputText] = useState(text);
-
-  const handleSubmit = (e) => {
-    if (e.key === "Enter") {
-      updateValues();
-    }
-  };
-
-  const updateValues = (shortcutOverride = keyboardShortcut) => {
-    dispatch(
-      updateItem(rowNum, itemNum, {
-        text: inputText,
-        url: inputUrl,
-        isSmallText: inputIsSmallText,
-        keyboardShortcut: shortcutOverride,
-      })
-    );
-  };
-
-  const updateKeyboardShortcut = (newShortcut) => {
-    updateValues(newShortcut);
-  };
+  const { text, url, id, isSmallText } = item;
 
   const [attachBothDragAndDropRefs, isDraggingAnywhere, isDraggingOver] =
     useDragAndDropItem(itemNum, rowNum);
@@ -48,9 +23,14 @@ export default function RowItem({ item, itemNum, rowNum, isSmallText }) {
           type="url"
           className="text-blue-600"
           placeholder="Link address"
-          value={inputUrl}
-          onKeyPress={handleSubmit}
-          onChange={(e) => setInputUrl(e.target.value)}
+          value={url}
+          onChange={(e) => {
+            dispatch(
+              updateItem(rowNum, itemNum, {
+                url: e.target.value,
+              })
+            );
+          }}
         />
       </div>
       <div>
@@ -59,31 +39,34 @@ export default function RowItem({ item, itemNum, rowNum, isSmallText }) {
           type="text"
           className="text-green-600"
           placeholder="Link text"
-          value={inputText}
-          onKeyPress={handleSubmit}
-          onChange={(e) => setInputText(e.target.value)}
+          value={text}
+          onChange={(e) => {
+            dispatch(
+              updateItem(rowNum, itemNum, {
+                text: e.target.value,
+              })
+            );
+          }}
         />
       </div>
       <div>
         Keyboard shortcut:{" "}
-        <KeyboardShortcutButton
-          item={item}
-          onUpdateKeyboardShortcut={updateKeyboardShortcut}
-        />
+        <KeyboardShortcutButton item={item} rowNum={rowNum} itemNum={itemNum} />
       </div>
       <div>
         <label>
           <Checkbox
-            checked={inputIsSmallText}
-            onChange={(e) => {
-              setInputIsSmallText(e.target.checked);
+            checked={isSmallText}
+            onChange={() => {
+              dispatch(
+                updateItem(rowNum, itemNum, {
+                  isSmallText: !isSmallText,
+                })
+              );
             }}
           />
           Small text
         </label>
-      </div>
-      <div>
-        <button onClick={() => updateValues()}>Update</button>
       </div>
       <div>
         <button onClick={() => dispatch(deleteItem(rowNum, itemNum, id))}>
