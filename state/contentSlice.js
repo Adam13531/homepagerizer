@@ -8,6 +8,7 @@ function makeNewTextItem() {
   return {
     text: "New item",
     url: "",
+    isSmallText: false,
     keyboardShortcut: null,
     id: uniqid.time(),
   };

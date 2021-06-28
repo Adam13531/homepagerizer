@@ -54,7 +54,7 @@ export default function generateHtml(state, { showEditButton = true }) {
       return;
     }
     _.forEach(row, (rowItem) => {
-      const { text, url, keyboardShortcut } = rowItem;
+      const { text, url, isSmallText, keyboardShortcut } = rowItem;
       let rowContents = "";
       if (url === "") {
         rowContents = `<span>${text}</span>\n`;
@@ -63,6 +63,9 @@ export default function generateHtml(state, { showEditButton = true }) {
           text,
           keyboardShortcut
         )}</a>\n`;
+      }
+      if (isSmallText) {
+        rowContents = `<span class="small">${rowContents}</span>`;
       }
       rowElements += `${rowContents}`;
     });
@@ -94,6 +97,10 @@ a:hover {
 .shortcut {
   color: ${accentColor};
   font-weight: bold;
+}
+
+.small {
+  font-size: 0.5rem;
 }
 
 table {

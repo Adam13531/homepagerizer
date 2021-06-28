@@ -17,6 +17,7 @@
     "file-saver": "2.0.5",
     "lodash": "4.17.21",
     "next": "^10.0.0",
+    "rc-checkbox": "2.3.2",
     "rc-tooltip": "5.1.1",
     "react": "17.0.1",
     "react-color": "2.19.3",

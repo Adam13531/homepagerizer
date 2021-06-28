@@ -6,11 +6,13 @@ import classNames from "classnames";
 import { useDispatch } from "react-redux";
 import { updateItem, addItemBefore } from "../state/contentSlice";
 import { deleteItem } from "../state/actions";
+import Checkbox from "rc-checkbox";
 
-export default function RowItem({ item, itemNum, rowNum }) {
+export default function RowItem({ item, itemNum, rowNum, isSmallText }) {
   const dispatch = useDispatch();
 
   const { text, url, keyboardShortcut, id } = item;
+  const [inputIsSmallText, setInputIsSmallText] = useState(isSmallText);
   const [inputUrl, setInputUrl] = useState(url);
   const [inputText, setInputText] = useState(text);
 
@@ -25,6 +27,7 @@ export default function RowItem({ item, itemNum, rowNum }) {
       updateItem(rowNum, itemNum, {
         text: inputText,
         url: inputUrl,
+        isSmallText: inputIsSmallText,
         keyboardShortcut: shortcutOverride,
       })
     );
@@ -67,6 +70,17 @@ export default function RowItem({ item, itemNum, rowNum }) {
           item={item}
           onUpdateKeyboardShortcut={updateKeyboardShortcut}
         />
+      </div>
+      <div>
+        <label>
+          <Checkbox
+            checked={inputIsSmallText}
+            onChange={(e) => {
+              setInputIsSmallText(e.target.checked);
+            }}
+          />
+          Small text
+        </label>
       </div>
       <div>
         <button onClick={() => updateValues()}>Update</button>
