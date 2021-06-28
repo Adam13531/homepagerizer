@@ -28,7 +28,7 @@ function Preview() {
     <div>
       <button onClick={onSave}>Save</button>
       <div>Your homepage's preview:</div>
-      <iframe srcDoc={srcDoc} />
+      <iframe className="w-full" srcDoc={srcDoc} />
     </div>
   );
 }
