@@ -15,6 +15,18 @@ export default function RowItem({ item, itemNum, rowNum }) {
   const [attachBothDragAndDropRefs, isDraggingAnywhere, isDraggingOver] =
     useDragAndDropItem(itemNum, rowNum);
 
+  const addHttps = () => {
+    let newUrl = url;
+    if (!url.startsWith("https://")) {
+      newUrl = `https://${url}`;
+    }
+    dispatch(
+      updateItem(rowNum, itemNum, {
+        url: newUrl,
+      })
+    );
+  };
+
   const tooltipOverlay = (
     <div className="flex flex-col">
       <div>
@@ -32,6 +44,7 @@ export default function RowItem({ item, itemNum, rowNum }) {
             );
           }}
         />
+        <button onClick={addHttps}>https://</button>
       </div>
       <div>
         Text:
