@@ -29,6 +29,18 @@ export const slice = createSlice({
     addRow: (state) => {
       state.rows.push([]);
     },
+    relocateRow: {
+      reducer: (state, { payload }) => {
+        const { rowNum, targetRowNum } = payload;
+        const sourceRow = state.rows[rowNum];
+
+        state.rows.splice(rowNum, 1);
+        state.rows.splice(targetRowNum, 0, sourceRow);
+      },
+      prepare: (rowNum, targetRowNum) => {
+        return { payload: { rowNum, targetRowNum } };
+      },
+    },
     deleteRow: (state, { payload: rowNum }) => {
       state.rows.splice(rowNum, 1);
     },
@@ -92,6 +104,7 @@ export const {
   moveRowDown,
   addItemBefore,
   updateItem,
+  relocateRow,
   addItemAtEndOfRow,
   setHomepagerizerAddress,
 } = slice.actions;

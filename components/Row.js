@@ -1,16 +1,21 @@
+import classNames from "classnames";
+import useDragAndDropRow from "../hooks/useDragAndDropRow";
 import { useDispatch } from "react-redux";
 import { addItemAtEndOfRow, deleteRow } from "../state/contentSlice";
 
 export default function Row({ children, rowNum, isLowestRow }) {
   const dispatch = useDispatch();
+
+  const [attachBothDragAndDropRefs, isDraggingOver] = useDragAndDropRow(rowNum);
+
+  const css = classNames({
+    flex: true,
+    "shadow-xl": isDraggingOver,
+  });
+
   return (
-    <div className="flex">
-      <div
-        onClick={() => {
-          window.alert("I did not code this");
-        }}
-        className="border rounded-l-lg border-indigo-300 flex items-center px-2 cursor-grab"
-      >
+    <div className={css} ref={attachBothDragAndDropRefs}>
+      <div className="border rounded-l-lg border-indigo-300 flex items-center px-2 cursor-grab">
         <i className="las la-braille font-bold"></i>
       </div>
       <div className="gap-2 px-4 flex flex-wrap border border-r-0 border-l-0 border-indigo-300 py-4">
