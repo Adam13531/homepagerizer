@@ -37,13 +37,16 @@ export default function Rows() {
           );
         })}
       </div>
-      <button
-        onClick={() => {
-          dispatch(addRow());
-        }}
-      >
-        Add row
-      </button>
+      <div className="flex justify-end">
+        <button
+          className="bg-indigo-50 border-indigo-300 text-indigo-900 border rounded px-4 py-3"
+          onClick={() => {
+            dispatch(addRow());
+          }}
+        >
+          Add Row
+        </button>
+      </div>
     </>
   );
 }
