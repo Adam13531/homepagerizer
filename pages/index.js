@@ -5,7 +5,7 @@ import App from "../components/App";
 
 export default function Home() {
   return (
-    <div className="container">
+    <>
       <Head>
         <title>Homepagerizer</title>
         <link rel="icon" href="/favicon.ico" />
@@ -14,6 +14,6 @@ export default function Home() {
       <Provider store={store}>
         <App />
       </Provider>
-    </div>
+    </>
   );
 }
