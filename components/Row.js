@@ -25,7 +25,7 @@ export default function Row({ children, rowNum, isLowestRow }) {
       </div>
       <button
         onClick={() => dispatch(deleteRow(rowNum))}
-        className="border rounded-r-lg border-red-300 flex items-center text-red-600 px-2"
+        className="border rounded-r-lg border-red-300 flex items-center text-red-600 px-2 bg-red-50"
       >
         <i className="las la-trash-alt font-bold"></i>
       </button>
