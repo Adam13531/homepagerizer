@@ -41,6 +41,17 @@ function getLinkTextGivenShortcut(text, keyboardShortcut) {
   return `${text} (<span class="shortcut">${keyboardShortcut}</span>)`;
 }
 
+function addHttpsIfNoProtocolPresent(url) {
+  // We don't check for slashes in case the user has something like
+  // "intent:<android app>".
+  const regex = /^\w+:/g;
+  if (url.match(regex)) {
+    return url;
+  }
+
+  return `https://${url}`;
+}
+
 /**
  * Generates the HTML of the resulting homepage.
  */
@@ -59,7 +70,8 @@ export default function generateHtml(state, { showEditButton = true }) {
       if (url === "") {
         rowContents = `<span>${text}</span>\n`;
       } else {
-        rowContents = `<a href=${url}>${getLinkTextGivenShortcut(
+        const urlWithProtocol = addHttpsIfNoProtocolPresent(url);
+        rowContents = `<a href=${urlWithProtocol}>${getLinkTextGivenShortcut(
           text,
           keyboardShortcut
         )}</a>\n`;
@@ -129,6 +141,10 @@ table {
 
   delete jsonData.selectedItem;
 
+  // Note: the reason why the regex-matching logic for inserting the protocol
+  // has to be in the JavaScript itself is because the user may not have typed
+  // the protocol, so when they edit the page, we don't want to add it in
+  // automatically for them
   const javascript = `
   const homepageJsonEle = document.getElementById('homepageJson');
   const json = JSON.parse(homepageJsonEle.text);
@@ -141,8 +157,13 @@ table {
     });
   });
   window.addEventListener("keydown", ({key}) => {
-    if (keysToUrls[key]) {
-      window.location.href = keysToUrls[key];
+    let url = keysToUrls[key];
+    if (url) {
+      const regex = /^\\w+:/g;
+      if (!url.match(regex)) {
+        url = 'https://' + url;
+      }
+      window.location.href = url;
     }
   });
 

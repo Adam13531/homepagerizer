@@ -7,6 +7,7 @@ import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import ColorPickers from "../components/ColorPickers";
 import Preview from "../components/Preview";
+import EditItemModal from "../components/EditItemModal";
 
 export default function App() {
   useUrlEffects();
@@ -19,6 +20,7 @@ export default function App() {
         <Rows />
         <ColorPickers />
         <Preview />
+        <EditItemModal />
         <ToastContainer
           position="top-left"
           autoClose={5000}

@@ -1,0 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.rc-checkbox .rc-checkbox-inner {
+  @apply border rounded border-indigo-300;
+}

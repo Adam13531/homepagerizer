@@ -50,7 +50,7 @@ export default function useDragAndDropItem(itemNum, rowNum) {
     [rows]
   );
 
-  const [{ isDragging: isDraggingAnywhere }, drag] = useDrag(
+  const [{ isDragging }, drag] = useDrag(
     () => ({
       type: "ITEM",
       end: (item, monitor) => {
@@ -92,5 +92,5 @@ export default function useDragAndDropItem(itemNum, rowNum) {
     drop(el);
   };
 
-  return [attachBothDragAndDropRefs, isDraggingAnywhere, isDraggingOver];
+  return [attachBothDragAndDropRefs, isDraggingOver];
 }

@@ -50,7 +50,7 @@ export default function KeyboardShortcutButton({ item, rowNum, itemNum }) {
 
   return (
     <button
-      className="border-2"
+      className="p-3 text-indigo-900 border-indigo-300 border rounded "
       onClick={() => {
         dispatch(
           setItemIdListeningForHotkey(isThisItemListeningForHotkey ? null : id)
