@@ -1,19 +1,20 @@
-import Tooltip from "rc-tooltip";
 import KeyboardShortcutButton from "./KeyboardShortcutButton";
 import useDragAndDropItem from "../hooks/useDragAndDropItem";
 import classNames from "classnames";
 import { useDispatch } from "react-redux";
-import { updateItem, addItemBefore } from "../state/contentSlice";
+import { updateItem } from "../state/contentSlice";
 import { deleteItem } from "../state/actions";
 import Checkbox from "rc-checkbox";
 
 export default function RowItem({ item, itemNum, rowNum }) {
   const dispatch = useDispatch();
 
-  const { text, url, id, isSmallText } = item;
+  const { text, url, id, isSmallText, keyboardShortcut } = item;
 
   const [attachBothDragAndDropRefs, isDraggingAnywhere, isDraggingOver] =
     useDragAndDropItem(itemNum, rowNum);
+
+  const isKeyboardShortcutSet = !_.isNil(keyboardShortcut);
 
   const addHttps = () => {
     let newUrl = url;
@@ -89,31 +90,26 @@ export default function RowItem({ item, itemNum, rowNum }) {
     </div>
   );
 
+  const constantItemClasses =
+    "text-indigo-900 cursor-pointer px-4 py-3 border border-indigo-300 rounded space-x-2 flex items-center h-14";
   const itemCss = classNames({
-    "text-blue-500": true,
-    "cursor-pointer": true,
-    "border-2": isDraggingOver,
+    [constantItemClasses]: true,
+    "bg-indigo-300": isDraggingOver,
   });
 
   return (
-    <span className="space-x-2">
-      <button onClick={() => dispatch(addItemBefore(rowNum, itemNum))}>
-        ➕
-      </button>
-      <Tooltip
-        placement={"bottom"}
-        mouseLeaveDelay={0.2}
-        overlayInnerStyle={isDraggingAnywhere ? { display: "none" } : {}}
-        overlay={tooltipOverlay}
-        align={{
-          offset: [0, 0],
-        }}
-        transitionName=""
-      >
-        <span ref={attachBothDragAndDropRefs} className={itemCss}>
-          {text}
+    <span ref={attachBothDragAndDropRefs} className={itemCss}>
+      {isKeyboardShortcutSet && (
+        <span
+          className={
+            "border border-indigo-300 rounded px-2 py-1 text-xs font-semibold"
+          }
+        >
+          {keyboardShortcut}
         </span>
-      </Tooltip>
+      )}
+      <span className="underline">{text}</span>
+      <i class="las la-edit"></i>
     </span>
   );
 }

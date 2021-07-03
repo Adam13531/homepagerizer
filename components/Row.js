@@ -9,7 +9,7 @@ import {
 export default function Row({ children, rowNum, isLowestRow }) {
   const dispatch = useDispatch();
   return (
-    <div className="space-x-2">
+    <div className="gap-2 flex flex-wrap">
       {children}
       <button onClick={() => dispatch(addItemAtEndOfRow(rowNum))}>➕</button>
       <button onClick={() => dispatch(deleteRow(rowNum))}>❌</button>
