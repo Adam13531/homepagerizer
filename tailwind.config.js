@@ -8,6 +8,9 @@ module.exports = {
         // "labels" for the edit modal.
         auto1fr: "auto 1fr auto",
       },
+      cursor: {
+        grab: "grab",
+      },
     },
   },
   variants: {
