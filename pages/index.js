@@ -9,6 +9,11 @@ export default function Home() {
       <Head>
         <title>Homepagerizer</title>
         <link rel="icon" href="/favicon.ico" />
+        <link
+          href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap"
+          rel="stylesheet"
+          key="google-fonts"
+        />
       </Head>
 
       <Provider store={store}>

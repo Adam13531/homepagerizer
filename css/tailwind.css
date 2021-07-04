@@ -5,3 +5,7 @@
 .rc-checkbox .rc-checkbox-inner {
   @apply border rounded border-indigo-300;
 }
+
+body {
+  font-family: Poppins;
+}
