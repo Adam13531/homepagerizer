@@ -57,8 +57,15 @@ function addHttpsIfNoProtocolPresent(url) {
  */
 export default function generateHtml(state, { showEditButton = true }) {
   let content = "";
-  const { rows, accentColor, bgColor, hoverColor, linkColor, textColor } =
-    state;
+  const {
+    rows,
+    accentColor,
+    bgColor,
+    hoverColor,
+    linkColor,
+    textColor,
+    fontFamily,
+  } = state;
   _.forEach(rows, (row) => {
     let rowElements = "";
     if (row.length === 0) {
@@ -84,10 +91,16 @@ export default function generateHtml(state, { showEditButton = true }) {
     content += `<tr><td>${rowElements}</td></tr>`;
   });
 
+  let safeFontFamily = "sans-serif";
+  if (!_.isEmpty(fontFamily)) {
+    safeFontFamily = `${fontFamily}, sans-serif`;
+  }
+
   let style = `
 body {
   background-color: ${bgColor};
-  color: ${textColor}
+  color: ${textColor};
+  font-family: ${safeFontFamily};
 }
 
 a {

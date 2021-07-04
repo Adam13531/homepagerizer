@@ -3,15 +3,21 @@ import { saveAs } from "file-saver";
 import debounceRender from "react-debounce-render";
 import { useSelector } from "react-redux";
 import { selectAllColors } from "../state/colorsSlice";
-import { selectRows, selectHomepagerizerAddress } from "../state/contentSlice";
+import {
+  selectRows,
+  selectHomepagerizerAddress,
+  selectFontFamily,
+} from "../state/contentSlice";
 
 function Preview() {
   const allColors = useSelector(selectAllColors);
   const rows = useSelector(selectRows);
   const homepagerizerAddress = useSelector(selectHomepagerizerAddress);
+  const fontFamily = useSelector(selectFontFamily);
   const state = {
     rows,
     homepagerizerAddress,
+    fontFamily,
     ...allColors,
   };
 

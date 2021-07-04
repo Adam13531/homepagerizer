@@ -1,5 +1,6 @@
 import Rows from "../components/Rows";
 import ColorPickers from "../components/ColorPickers";
+import FontPicker from "../components/FontPicker";
 
 export default function ToolSection() {
   return (
@@ -9,6 +10,8 @@ export default function ToolSection() {
         Customize Design
       </div>
       <ColorPickers />
+      <div className="mb-4" />
+      <FontPicker />
     </>
   );
 }
