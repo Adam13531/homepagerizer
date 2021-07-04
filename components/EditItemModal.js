@@ -6,6 +6,7 @@ import { selectEditingItem } from "../state/editingSlice";
 import { updateItem } from "../state/contentSlice";
 import { deleteItem } from "../state/actions";
 import KeyboardShortcutButton from "./KeyboardShortcutButton";
+import { setItemIdListeningForHotkey } from "../state/keyboardSlice";
 import Checkbox from "rc-checkbox";
 import { selectRows } from "../state/contentSlice";
 
@@ -23,6 +24,9 @@ export default function EditItemModal() {
   const { text, url, id, isSmallText } = item;
 
   const closeModal = () => {
+    // Closing this dialog means you're no longer listening for a hotkey since
+    // it's the only way to edit hotkeys.
+    dispatch(setItemIdListeningForHotkey(null));
     dispatch(setEditingItem(null, null));
   };
 
