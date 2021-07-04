@@ -3,24 +3,22 @@ import _ from "lodash";
 import { useSelector, useDispatch } from "react-redux";
 import { setEditingItem } from "../state/editingSlice";
 import { selectEditingItem } from "../state/editingSlice";
-import { updateItem } from "../state/contentSlice";
+import { updateItem, selectItem } from "../state/contentSlice";
 import { deleteItem } from "../state/actions";
 import KeyboardShortcutButton from "./KeyboardShortcutButton";
 import { setItemIdListeningForHotkey } from "../state/keyboardSlice";
 import Checkbox from "rc-checkbox";
-import { selectRows } from "../state/contentSlice";
 
 export default function EditItemModal() {
   const dispatch = useDispatch();
 
   const { rowNum, itemNum } = useSelector(selectEditingItem);
-  const rows = useSelector(selectRows);
-  const isEditingAnItem = !_.isNil(rowNum) && !_.isNil(itemNum);
-  if (!isEditingAnItem) {
+
+  const item = useSelector(selectItem(rowNum, itemNum));
+  if (_.isNil(item)) {
     return null;
   }
 
-  const item = rows[rowNum][itemNum];
   const { text, url, id, isSmallText } = item;
 
   const closeModal = () => {
@@ -32,7 +30,7 @@ export default function EditItemModal() {
 
   return (
     <Modal
-      isOpen={isEditingAnItem}
+      isOpen={true}
       onRequestClose={closeModal}
       contentLabel="Edit link properties"
       overlayClassName="fixed inset-0 bg-gray-900 bg-opacity-80 flex justify-center items-center"

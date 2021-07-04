@@ -98,6 +98,12 @@ export const {
 } = slice.actions;
 
 export const selectRows = (state) => state[reducerName].rows;
+export const selectItem = (rowNum, itemNum) => (state) => {
+  if (_.isNil(rowNum) || _.isNil(itemNum)) {
+    return null;
+  }
+  return state[reducerName].rows[rowNum][itemNum];
+};
 export const selectHomepagerizerAddress = (state) =>
   state[reducerName].homepagerizerAddress;
 
