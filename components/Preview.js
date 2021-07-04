@@ -12,8 +12,13 @@ function Preview() {
 
   return (
     <div>
-      <div>Your homepage's preview:</div>
-      <iframe className="w-full" srcDoc={srcDoc} />
+      <div className="text-indigo-900 font-bold text-2xl text-center mb-4">
+        Homepage Preview
+      </div>
+      <iframe
+        className="border rounded border-indigo-300 w-full"
+        srcDoc={srcDoc}
+      />
     </div>
   );
 }
