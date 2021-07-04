@@ -34,7 +34,7 @@ export default function EditItemModal() {
       onRequestClose={closeModal}
       contentLabel="Edit link properties"
       overlayClassName="fixed inset-0 bg-gray-900 bg-opacity-80 flex justify-center items-center"
-      className="bg-white rounded-lg shadow-xl transform transition-all my-8 align-middle max-w-lg w-full "
+      className="bg-white outline-none rounded-lg shadow-xl transform transition-all my-8 align-middle max-w-lg w-full "
     >
       <div className="flex flex-col text-indigo-900 gap-y-2 px-6 py-8">
         <span className="mb-1">Link Text</span>
