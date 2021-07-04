@@ -18,11 +18,7 @@ export default function Rows() {
           // there is one).
           const rowKey = `${rowNum}_${_.get(row[0], "id")}`;
           return (
-            <Row
-              key={rowKey}
-              rowNum={rowNum}
-              isLowestRow={rowNum === rows.length - 1}
-            >
+            <Row key={rowKey} rowNum={rowNum}>
               {_.map(row, (item, itemNum) => {
                 return (
                   <RowItem

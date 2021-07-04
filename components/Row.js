@@ -3,7 +3,7 @@ import useDragAndDropRow from "../hooks/useDragAndDropRow";
 import { useDispatch } from "react-redux";
 import { addItemAtEndOfRow, deleteRow } from "../state/contentSlice";
 
-export default function Row({ children, rowNum, isLowestRow }) {
+export default function Row({ children, rowNum }) {
   const dispatch = useDispatch();
 
   const [attachBothDragAndDropRefs, isDraggingOver] = useDragAndDropRow(rowNum);
