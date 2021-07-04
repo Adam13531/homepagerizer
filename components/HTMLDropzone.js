@@ -3,10 +3,16 @@ import classNames from "classnames";
 import { useState, useEffect } from "react";
 import { loadSavedState } from "../state/actions";
 import { parseHtml } from "../misc/parseHtml";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import Modal from "react-modal";
+import {
+  selectIsImportDialogOpen,
+  setShowImportDialog,
+} from "../state/editingSlice";
 
 export default function HTMLDropzone({}) {
   const [isDragging, setIsDragging] = useState(false);
+  const isImportDialogOpen = useSelector(selectIsImportDialogOpen);
 
   const dispatch = useDispatch();
   const onImport = (str) => {
@@ -29,15 +35,17 @@ export default function HTMLDropzone({}) {
     };
   }, []);
 
-  const { getRootProps, getInputProps } = useDropzone({
+  const closeModal = () => {
+    setIsDragging(false);
+    dispatch(setShowImportDialog(false));
+  };
+
+  const { getRootProps, getInputProps, open, isDragActive } = useDropzone({
     accept: ["text/html"],
     multiple: false,
-    noClick: true,
-    onDragLeave: () => {
-      setIsDragging(false);
-    },
     onDrop: (acceptedFiles) => {
-      setIsDragging(false);
+      closeModal();
+
       acceptedFiles.forEach((file) => {
         console.log(`Reading ${file.name}`);
 
@@ -55,17 +63,49 @@ export default function HTMLDropzone({}) {
     },
   });
 
-  const extraCss = classNames({
+  const dropzoneCss = classNames({
     dropzone: true,
-    invisible: !isDragging,
+    "border-2 border-dashed border-indigo-300 rounded-2xl self-stretch mb-4": true,
+    "shadow-xl bg-indigo-200": isDragActive,
   });
 
   return (
-    <div {...getRootProps({ className: extraCss })}>
-      <input {...getInputProps()} />
-      <div className="fixed h-full w-full flex items-center justify-center z-10 text-gray-100 bg-red-700 bg-opacity-70">
-        Drag your existing homepage anywhere!
+    <Modal
+      isOpen={isDragging || isImportDialogOpen}
+      onRequestClose={closeModal}
+      contentLabel="Import homepage"
+      overlayClassName="fixed inset-0 bg-gray-900 bg-opacity-80 flex justify-center items-center"
+      className="bg-white outline-none rounded-lg shadow-xl transform transition-all my-8 align-middle max-w-lg w-full "
+    >
+      <div>
+        <input {...getInputProps()} />
+        <div className="outline-none bg-white rounded-lg py-6 px-8 text-indigo-900 flex flex-col items-center gap-y-2">
+          <div className="text-2xl font-bold">Import Homepage</div>
+          <div className="text-indigo-500 mb-6">
+            Upload your homepage .HTML file
+          </div>
+          <div {...getRootProps({ className: dropzoneCss })}>
+            <div className="flex flex-col items-center py-16 px-16">
+              <i class="las la-file-code text-4xl"></i>
+              <div>Drop file or click to select here</div>
+            </div>
+          </div>
+          <div className="flex justify-end self-stretch gap-x-4">
+            <button
+              onClick={closeModal}
+              className="py-3 px-4 bg-indigo-50 border border-indigo-300 rounded"
+            >
+              Cancel
+            </button>
+            <button
+              onClick={open}
+              className="py-3 px-4 bg-indigo-50 border border-indigo-300 rounded"
+            >
+              Import
+            </button>
+          </div>
+        </div>
       </div>
-    </div>
+    </Modal>
   );
 }

@@ -12,6 +12,12 @@ export const slice = createSlice({
      */
     rowNum: null,
     itemNum: null,
+
+    /**
+     * If true, the import-homepage dialog is open.
+     * @type {boolean}
+     */
+    isImportDialogOpen: false,
   },
   reducers: {
     setEditingItem: {
@@ -23,6 +29,9 @@ export const slice = createSlice({
       prepare: (rowNum, itemNum) => {
         return { payload: { rowNum, itemNum } };
       },
+    },
+    setShowImportDialog: (state, { payload }) => {
+      state.isImportDialogOpen = payload;
     },
   },
   extraReducers: (builder) => {
@@ -38,7 +47,7 @@ export const slice = createSlice({
   },
 });
 
-export const { setEditingItem } = slice.actions;
+export const { setEditingItem, setShowImportDialog } = slice.actions;
 
 export const selectEditingItem = (state) => {
   return {
@@ -46,5 +55,7 @@ export const selectEditingItem = (state) => {
     itemNum: state[reducerName].itemNum,
   };
 };
+export const selectIsImportDialogOpen = (state) =>
+  state[reducerName].isImportDialogOpen;
 
 export default slice.reducer;
