@@ -44,16 +44,6 @@ export const slice = createSlice({
     deleteRow: (state, { payload: rowNum }) => {
       state.rows.splice(rowNum, 1);
     },
-    moveRowUp: (state, { payload: rowNum }) => {
-      const row = state.rows[rowNum];
-      state.rows.splice(rowNum, 1);
-      state.rows.splice(rowNum - 1, 0, row);
-    },
-    moveRowDown: (state, { payload: rowNum }) => {
-      const row = state.rows[rowNum];
-      state.rows.splice(rowNum, 1);
-      state.rows.splice(rowNum + 1, 0, row);
-    },
     addItemBefore: {
       reducer: (state, { payload }) => {
         const { rowNum, itemNum } = payload;
@@ -100,8 +90,6 @@ export const slice = createSlice({
 export const {
   addRow,
   deleteRow,
-  moveRowUp,
-  moveRowDown,
   addItemBefore,
   updateItem,
   relocateRow,
