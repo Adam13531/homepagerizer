@@ -23,7 +23,7 @@ export default function HeaderControls({}) {
       <div className="flex justify-between mb-1">
         <input
           type="text"
-          className="border border-b-2 border-indigo-300 py-3 px-4 w-72 text-indigo-900 text-2xl"
+          className="border-b-2 border-indigo-300 py-3 px-4 w-72 text-indigo-900 text-2xl"
           placeholder={"Title your homepage"}
           value={homepageTitle}
           onChange={(e) => {
