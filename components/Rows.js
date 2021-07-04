@@ -11,7 +11,7 @@ export default function Rows() {
 
   return (
     <>
-      <div className="space-y-4">
+      <div className="space-y-4 mb-4">
         {_.map(rows, (row, rowNum) => {
           // Row keys aren't all that important until rows are moved, and since
           // they don't have an identifier, we'll use the first item's ID (if
