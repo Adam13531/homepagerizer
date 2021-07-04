@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { SketchPicker } from "react-color";
+import { isColorBright } from "../misc/util";
 
 export default function ColorPickerPopup({ onChange, color, text }) {
   const [displayColorPicker, setDisplayColorPicker] = useState(false);
@@ -23,20 +24,46 @@ export default function ColorPickerPopup({ onChange, color, text }) {
     bottom: "0px",
     left: "0px",
   };
+
+  const buttonStyle = {
+    backgroundColor: color,
+    color: isColorBright(color) ? "black" : "white",
+  };
+
   return (
     <span>
-      <button onClick={handleClick}>{text}</button>
-      {displayColorPicker ? (
+      <div className="text-indigo-900 mb-2">{text}</div>
+      <div className="flex">
+        <input
+          type="text"
+          className="border rounded-l border-indigo-300 py-3 px-4 w-32 text-indigo-900"
+          placeholder={text}
+          value={color}
+          onChange={(e) => {
+            onChange(e.target.value);
+          }}
+        />
+        <button
+          style={buttonStyle}
+          className="border rounded-r border-indigo-300 py-3 px-4"
+          onClick={handleClick}
+        >
+          <i className="las la-fill-drip text-lg"></i>
+        </button>
+      </div>
+      {displayColorPicker && (
         <div style={popover}>
           <div style={cover} onClick={handleClose} />
           <SketchPicker
             presetColors={[]}
             disableAlpha={true}
             color={color}
-            onChange={onChange}
+            onChange={({ hex }) => {
+              onChange(hex);
+            }}
           />
         </div>
-      ) : null}
+      )}
     </span>
   );
 }

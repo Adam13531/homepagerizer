@@ -1,6 +1,5 @@
 import ColorPickerPopup from "./ColorPickerPopup";
 import { useSelector, useDispatch } from "react-redux";
-
 import {
   setBgColor,
   setTextColor,
@@ -17,40 +16,40 @@ export default function ColorPickers({}) {
   const dispatch = useDispatch();
 
   return (
-    <div className="space-x-2">
+    <div className="space-x-4 flex flex-wrap gap-y-2">
       <ColorPickerPopup
         color={bgColor}
-        text="Background color"
-        onChange={(color) => {
-          dispatch(setBgColor(color.hex));
-        }}
-      />
-      <ColorPickerPopup
-        color={linkColor}
-        text="Link color"
-        onChange={(color) => {
-          dispatch(setLinkColor(color.hex));
+        text="Background Color"
+        onChange={(hex) => {
+          dispatch(setBgColor(hex));
         }}
       />
       <ColorPickerPopup
         color={textColor}
-        text="Text color"
-        onChange={(color) => {
-          dispatch(setTextColor(color.hex));
+        text="Text Color"
+        onChange={(hex) => {
+          dispatch(setTextColor(hex));
         }}
       />
       <ColorPickerPopup
-        color={accentColor}
-        text="Accent color"
-        onChange={(color) => {
-          dispatch(setAccentColor(color.hex));
+        color={linkColor}
+        text="Link Color"
+        onChange={(hex) => {
+          dispatch(setLinkColor(hex));
         }}
       />
       <ColorPickerPopup
         color={hoverColor}
-        text="Hover color"
-        onChange={(color) => {
-          dispatch(setHoverColor(color.hex));
+        text="Link Hover Color"
+        onChange={(hex) => {
+          dispatch(setHoverColor(hex));
+        }}
+      />
+      <ColorPickerPopup
+        color={accentColor}
+        text="Hotkey Color"
+        onChange={(hex) => {
+          dispatch(setAccentColor(hex));
         }}
       />
     </div>
