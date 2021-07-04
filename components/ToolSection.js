@@ -9,7 +9,7 @@ export default function ToolSection() {
       <HeaderControls />
       <div className="mb-4" />
       <Rows />
-      <div className="mt-16 mb-4 text-indigo-900 text-2xl font-bold">
+      <div className="mt-8 mb-4 text-indigo-900 text-2xl font-bold">
         Customize Design
       </div>
       <ColorPickers />
