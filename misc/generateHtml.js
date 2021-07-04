@@ -54,6 +54,9 @@ function addHttpsIfNoProtocolPresent(url) {
 
 /**
  * Generates the HTML of the resulting homepage.
+ *
+ * @param {Object} state - see the useHomepageState hook for how to form
+ * `state`.
  */
 export default function generateHtml(state, { showEditButton = true }) {
   let content = "";
@@ -65,6 +68,7 @@ export default function generateHtml(state, { showEditButton = true }) {
     linkColor,
     textColor,
     fontFamily,
+    homepageTitle,
   } = state;
   _.forEach(rows, (row) => {
     let rowElements = "";
@@ -190,7 +194,7 @@ table {
 <html>
 <head>
 <meta charset="utf-8" />
-<title>Homepage</title>
+<title>${homepageTitle}</title>
 <style type="text/css">
 ${style}
 </style>

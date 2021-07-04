@@ -27,6 +27,12 @@ export const slice = createSlice({
     homepagerizerAddress: null,
 
     /**
+     * Title of the resulting homepage.
+     * @type {string}
+     */
+    homepageTitle: "My Homepage",
+
+    /**
      * This can be any font family that the user's browser can load, including
      * one only on their hard drive.
      * @type {string}
@@ -85,11 +91,15 @@ export const slice = createSlice({
     setFontFamily: (state, { payload }) => {
       state.fontFamily = payload;
     },
+    setHomepageTitle: (state, { payload }) => {
+      state.homepageTitle = payload;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(loadSavedState, (state, { payload }) => {
       state.rows = payload.rows;
       state.fontFamily = payload.fontFamily;
+      state.homepageTitle = payload.homepageTitle;
     });
     builder.addCase(deleteItem, (state, { payload }) => {
       const { rowNum, itemNum } = payload;
@@ -108,6 +118,7 @@ export const {
   addItemAtEndOfRow,
   setHomepagerizerAddress,
   setFontFamily,
+  setHomepageTitle,
 } = slice.actions;
 
 export const selectRows = (state) => state[reducerName].rows;
@@ -120,5 +131,6 @@ export const selectItem = (rowNum, itemNum) => (state) => {
 export const selectHomepagerizerAddress = (state) =>
   state[reducerName].homepagerizerAddress;
 export const selectFontFamily = (state) => state[reducerName].fontFamily;
+export const selectHomepageTitle = (state) => state[reducerName].homepageTitle;
 
 export default slice.reducer;
