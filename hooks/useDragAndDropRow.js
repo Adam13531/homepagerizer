@@ -18,7 +18,7 @@ export default function useDragAndDropRow(rowNum) {
     [rowNum]
   );
 
-  const [{ isDragging }, drag] = useDrag(
+  const [{ isDragging }, dragRef, dragPreviewRef] = useDrag(
     () => ({
       type: "ROW",
       end: (item, monitor) => {
@@ -35,7 +35,7 @@ export default function useDragAndDropRow(rowNum) {
     [onRelocateRow, rowNum]
   );
 
-  const [{ isOver: isDraggingOver }, drop] = useDrop(
+  const [{ isOver: isDraggingOver }, dropRef] = useDrop(
     () => ({
       accept: "ROW",
 
@@ -51,10 +51,10 @@ export default function useDragAndDropRow(rowNum) {
     [rowNum]
   );
 
-  const attachBothDragAndDropRefs = (el) => {
-    drag(el);
-    drop(el);
+  const attachDropAndDragPreviewRefs = (el) => {
+    dropRef(el);
+    dragPreviewRef(el);
   };
 
-  return [attachBothDragAndDropRefs, isDraggingOver];
+  return [dragRef, attachDropAndDragPreviewRefs, isDraggingOver];
 }

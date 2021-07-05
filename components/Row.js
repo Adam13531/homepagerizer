@@ -6,7 +6,8 @@ import { addItemAtEndOfRow, deleteRow } from "../state/contentSlice";
 export default function Row({ children, rowNum }) {
   const dispatch = useDispatch();
 
-  const [attachBothDragAndDropRefs, isDraggingOver] = useDragAndDropRow(rowNum);
+  const [dragRef, attachDropAndDragPreviewRefs, isDraggingOver] =
+    useDragAndDropRow(rowNum);
 
   const css = classNames({
     flex: true,
@@ -14,8 +15,11 @@ export default function Row({ children, rowNum }) {
   });
 
   return (
-    <div className={css} ref={attachBothDragAndDropRefs}>
-      <div className="border rounded-l-lg border-indigo-300 flex items-center px-2 cursor-grab">
+    <div ref={attachDropAndDragPreviewRefs} className={css}>
+      <div
+        className="border rounded-l-lg border-indigo-300 flex items-center px-2 cursor-grab"
+        ref={dragRef}
+      >
         <i className="las la-braille font-bold"></i>
       </div>
       <div className="gap-2 px-4 flex flex-wrap border border-r-0 border-l-0 border-indigo-300 py-4">
