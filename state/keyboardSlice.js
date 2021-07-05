@@ -7,12 +7,10 @@ export const slice = createSlice({
   name: reducerName,
   initialState: {
     /**
-     * If this is null, no items are listening for a hotkey. Otherwise, it's the
-     * specific item that's waiting for a hotkey. There can only be one such item
-     * at a time.
-     * @type {?string}
+     * Whether or not we're trying to set a hotkey for an item.
+     * @type {boolean}
      */
-    itemIdListeningForHotkey: null,
+    isListeningForHotkey: false,
 
     /**
      * This will just refer to the event.key string property like "b" or "Escape".
@@ -21,32 +19,26 @@ export const slice = createSlice({
     lastPressedHotkey: null,
   },
   reducers: {
-    setItemIdListeningForHotkey: (state, { payload }) => {
-      state.itemIdListeningForHotkey = payload;
+    setIsListeningForHotkey: (state, { payload }) => {
+      state.isListeningForHotkey = payload;
     },
     setLastPressedHotkey: (state, { payload }) => {
       state.lastPressedHotkey = payload;
     },
   },
   extraReducers: (builder) => {
-    // If the item we're deleting is the one that was listening for a hotkey,
-    // then we have to reset that state.
-    builder.addCase(deleteItem, (state, { payload }) => {
-      const { itemIdListeningForHotkey } = state;
-      const deletingItemListeningForHotkey =
-        itemIdListeningForHotkey === payload.id;
-      state.itemIdListeningForHotkey = deletingItemListeningForHotkey
-        ? null
-        : itemIdListeningForHotkey;
+    // If we deleted an item, then we can no longer be listening for a hotkey
+    // since it would close the edit dialog.
+    builder.addCase(deleteItem, (state) => {
+      state.isListeningForHotkey = false;
     });
   },
 });
 
-export const { setItemIdListeningForHotkey, setLastPressedHotkey } =
-  slice.actions;
+export const { setIsListeningForHotkey, setLastPressedHotkey } = slice.actions;
 
-export const selectItemIdListeningForHotkey = (state) =>
-  state[reducerName].itemIdListeningForHotkey;
+export const selectIsListeningForHotkey = (state) =>
+  state[reducerName].isListeningForHotkey;
 export const selectLastPressedHotkey = (state) =>
   state[reducerName].lastPressedHotkey;
 

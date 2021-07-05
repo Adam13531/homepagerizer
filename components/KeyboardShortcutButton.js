@@ -1,27 +1,27 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
-  selectItemIdListeningForHotkey,
   selectLastPressedHotkey,
   setLastPressedHotkey,
-  setItemIdListeningForHotkey,
+  setIsListeningForHotkey,
+  selectIsListeningForHotkey,
 } from "../state/keyboardSlice";
-import { updateItem } from "../state/contentSlice";
 
 /**
  * A button that knows how to listen to a keyboard shortcut and update the item
  * that this belongs to.
  */
-export default function KeyboardShortcutButton({ item, rowNum, itemNum }) {
+export default function KeyboardShortcutButton({
+  keyboardShortcut,
+  onChooseShortcut,
+}) {
   const dispatch = useDispatch();
 
-  const itemIdListeningForHotkey = useSelector(selectItemIdListeningForHotkey);
   const lastPressedHotkey = useSelector(selectLastPressedHotkey);
-  const { keyboardShortcut, id } = item;
-  const isThisItemListeningForHotkey = itemIdListeningForHotkey === id;
+  const isListeningForHotkey = useSelector(selectIsListeningForHotkey);
 
   useEffect(() => {
-    if (_.isNil(lastPressedHotkey) || !isThisItemListeningForHotkey) {
+    if (_.isNil(lastPressedHotkey) || !isListeningForHotkey) {
       return;
     }
 
@@ -30,21 +30,17 @@ export default function KeyboardShortcutButton({ item, rowNum, itemNum }) {
       lastPressedHotkey === "Backspace" ? null : lastPressedHotkey;
 
     // Clear the last-pressed hotkey and the item requesting that hotkey.
-    dispatch(setItemIdListeningForHotkey(null));
+    dispatch(setIsListeningForHotkey(false));
     dispatch(setLastPressedHotkey(null));
 
-    dispatch(
-      updateItem(rowNum, itemNum, {
-        keyboardShortcut: realHotkey,
-      })
-    );
-  }, [lastPressedHotkey, isThisItemListeningForHotkey]);
+    onChooseShortcut(realHotkey);
+  }, [lastPressedHotkey, isListeningForHotkey]);
 
   let keyboardShortcutText = _.isNil(keyboardShortcut)
     ? "(unset)"
     : keyboardShortcut;
 
-  if (isThisItemListeningForHotkey) {
+  if (isListeningForHotkey) {
     keyboardShortcutText = "Listening...";
   }
 
@@ -52,9 +48,7 @@ export default function KeyboardShortcutButton({ item, rowNum, itemNum }) {
     <button
       className="p-3 text-indigo-900 border-indigo-300 border rounded "
       onClick={() => {
-        dispatch(
-          setItemIdListeningForHotkey(isThisItemListeningForHotkey ? null : id)
-        );
+        dispatch(setIsListeningForHotkey(!isListeningForHotkey));
       }}
     >
       {keyboardShortcutText}

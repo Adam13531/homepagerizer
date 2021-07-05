@@ -1,31 +1,58 @@
 import Modal from "react-modal";
 import _ from "lodash";
+import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setEditingItem } from "../state/editingSlice";
 import { selectEditingItem } from "../state/editingSlice";
 import { updateItem, selectItem } from "../state/contentSlice";
 import { deleteItem } from "../state/actions";
 import KeyboardShortcutButton from "./KeyboardShortcutButton";
-import { setItemIdListeningForHotkey } from "../state/keyboardSlice";
+import { setIsListeningForHotkey } from "../state/keyboardSlice";
 import Checkbox from "rc-checkbox";
 
 export default function EditItemModal() {
-  const dispatch = useDispatch();
-
   const { rowNum, itemNum } = useSelector(selectEditingItem);
-
   const item = useSelector(selectItem(rowNum, itemNum));
   if (_.isNil(item)) {
     return null;
   }
 
-  const { text, url, id, isSmallText } = item;
+  return <EditItemModalContent item={item} rowNum={rowNum} itemNum={itemNum} />;
+}
+
+/**
+ * This is a layer of indirection from EditItemModal for a couple of reasons:
+ * 1. This component doesn't have to worry about "item" being null.
+ * 2. This component mounts once for each item, so useState can have the proper
+ *    initial values.
+ */
+function EditItemModalContent({ item, rowNum, itemNum }) {
+  const dispatch = useDispatch();
+
+  const { text, url, id, isSmallText, keyboardShortcut } = item;
+  const [inputText, setInputText] = useState(text);
+  const [inputUrl, setInputUrl] = useState(url);
+  const [inputIsSmallText, setInputIsSmallText] = useState(isSmallText);
+  const [inputKeyboardShortcut, setInputKeyboardShortcut] =
+    useState(keyboardShortcut);
 
   const closeModal = () => {
     // Closing this dialog means you're no longer listening for a hotkey since
     // it's the only way to edit hotkeys.
-    dispatch(setItemIdListeningForHotkey(null));
+    dispatch(setIsListeningForHotkey(false));
     dispatch(setEditingItem(null, null));
+  };
+
+  const onSave = () => {
+    dispatch(
+      updateItem(rowNum, itemNum, {
+        text: inputText,
+        url: inputUrl,
+        isSmallText: inputIsSmallText,
+        keyboardShortcut: inputKeyboardShortcut,
+      })
+    );
+    closeModal();
   };
 
   return (
@@ -44,13 +71,9 @@ export default function EditItemModal() {
             className="border rounded border-indigo-300 py-3 px-4 w-full"
             placeholder="Link text"
             autoFocus
-            value={text}
+            value={inputText}
             onChange={(e) => {
-              dispatch(
-                updateItem(rowNum, itemNum, {
-                  text: e.target.value,
-                })
-              );
+              setInputText(e.target.value);
             }}
           />
         </div>
@@ -60,13 +83,9 @@ export default function EditItemModal() {
             type="url"
             className="border rounded border-indigo-300 py-3 px-2 w-full"
             placeholder="Link address"
-            value={url}
+            value={inputUrl}
             onChange={(e) => {
-              dispatch(
-                updateItem(rowNum, itemNum, {
-                  url: e.target.value,
-                })
-              );
+              setInputUrl(e.target.value);
             }}
           />
         </div>
@@ -75,21 +94,16 @@ export default function EditItemModal() {
           <span>Small text</span>
           <div>
             <KeyboardShortcutButton
-              item={item}
-              rowNum={rowNum}
-              itemNum={itemNum}
+              keyboardShortcut={inputKeyboardShortcut}
+              onChooseShortcut={setInputKeyboardShortcut}
             />
           </div>
           <div>
             <label>
               <Checkbox
-                checked={isSmallText}
-                onChange={() => {
-                  dispatch(
-                    updateItem(rowNum, itemNum, {
-                      isSmallText: !isSmallText,
-                    })
-                  );
+                checked={inputIsSmallText}
+                onChange={(e) => {
+                  setInputIsSmallText(e.target.checked);
                 }}
               />
             </label>
@@ -113,7 +127,7 @@ export default function EditItemModal() {
             </div>
             <button
               className="border border-indigo-700 text-white rounded bg-indigo-700 py-3 px-4"
-              onClick={closeModal}
+              onClick={onSave}
             >
               Save Link
             </button>

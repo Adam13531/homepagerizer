@@ -2,11 +2,12 @@ import { useEffect } from "react";
 import _ from "lodash";
 import { toast } from "react-toastify";
 import { useSelector, useDispatch } from "react-redux";
-import { selectRows } from "../state/contentSlice";
+import { selectRows, selectItem } from "../state/contentSlice";
+import { selectEditingItem } from "../state/editingSlice";
 import {
-  setItemIdListeningForHotkey,
+  setIsListeningForHotkey,
   setLastPressedHotkey,
-  selectItemIdListeningForHotkey,
+  selectIsListeningForHotkey,
 } from "../state/keyboardSlice";
 
 /**
@@ -53,13 +54,15 @@ function getItemUsingKeyboardShortcut(rows, keyboardShortcut) {
 export default function useKeyboardListener() {
   const dispatch = useDispatch();
   const rows = useSelector(selectRows);
-  const itemIdListeningForHotkey = useSelector(selectItemIdListeningForHotkey);
+  const isListeningForHotkey = useSelector(selectIsListeningForHotkey);
+  const { rowNum, itemNum } = useSelector(selectEditingItem);
+  const item = useSelector(selectItem(rowNum, itemNum));
   useEffect(() => {
     const handleKeyDown = (e) => {
       const { key } = e;
 
       // If we're not even listening for a hotkey, then don't do anything.
-      if (_.isNil(itemIdListeningForHotkey)) {
+      if (!isListeningForHotkey) {
         return;
       }
 
@@ -67,7 +70,7 @@ export default function useKeyboardListener() {
 
       // Pressing escape bails out of setting a hotkey.
       if (key === "Escape") {
-        dispatch(setItemIdListeningForHotkey(null));
+        dispatch(setIsListeningForHotkey(false));
         return;
       }
 
@@ -80,7 +83,7 @@ export default function useKeyboardListener() {
       const itemUsingKeyboardShortcut = getItemUsingKeyboardShortcut(rows, key);
       if (
         !_.isNil(itemUsingKeyboardShortcut) &&
-        itemUsingKeyboardShortcut.id !== itemIdListeningForHotkey
+        itemUsingKeyboardShortcut.id !== _.get(item, "id")
       ) {
         toast(
           `${key} is already in use by "${itemUsingKeyboardShortcut.text}"; press another keyboard key or escape to cancel.`,
@@ -98,5 +101,5 @@ export default function useKeyboardListener() {
     return function cleanup() {
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [rows, itemIdListeningForHotkey, dispatch]);
+  }, [rows, isListeningForHotkey, item, dispatch]);
 }
