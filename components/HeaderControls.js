@@ -35,7 +35,7 @@ export default function HeaderControls({}) {
           onClick={onSave}
           className="bg-indigo-700 text-white rounded py-3 px-4"
         >
-          <i class="las la-arrow-circle-down"></i> Save & Download
+          <i className="las la-arrow-circle-down"></i> Save & Download
         </button>
       </div>
       <div>
@@ -49,7 +49,7 @@ export default function HeaderControls({}) {
             }}
             className="text-indigo-900"
           >
-            <i class="las la-file-upload"></i>
+            <i className="las la-file-upload"></i>
           </button>
         </Tooltip>
       </div>

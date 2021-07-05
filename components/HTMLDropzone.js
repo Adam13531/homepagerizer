@@ -86,7 +86,7 @@ export default function HTMLDropzone({}) {
           </div>
           <div {...getRootProps({ className: dropzoneCss })}>
             <div className="flex flex-col items-center py-16 px-16">
-              <i class="las la-file-code text-4xl"></i>
+              <i className="las la-file-code text-4xl"></i>
               <div>Drop file or click to select here</div>
             </div>
           </div>
