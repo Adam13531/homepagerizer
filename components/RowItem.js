@@ -40,7 +40,7 @@ export default function RowItem({ item, itemNum, rowNum }) {
         </span>
       )}
       <span className="underline">{text}</span>
-      <i className="las la-edit"></i>
+      <i className="lar la-edit"></i>
     </span>
   );
 }

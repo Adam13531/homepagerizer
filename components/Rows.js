@@ -40,7 +40,7 @@ export default function Rows() {
             dispatch(addRow());
           }}
         >
-          Add Row
+          <i className="las la-plus-circle"></i> Add Row
         </button>
       </div>
     </>
