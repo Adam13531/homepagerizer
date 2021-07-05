@@ -16,7 +16,7 @@ function Preview() {
         Homepage Preview
       </div>
       <iframe
-        className="border rounded border-indigo-300 w-full"
+        className="border rounded border-indigo-300 w-full h-96"
         srcDoc={srcDoc}
       />
     </div>

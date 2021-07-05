@@ -136,17 +136,28 @@ table {
   border: 0;
 }
 
-#edit {
-  background-color: ${bgColor};
-  border-color: ${accentColor};
+#editDiv {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+button {
+  background: none;
+  border: 0;
   color: ${linkColor};
+  cursor: pointer;
+  font-family: ${safeFontFamily};
+}
+
+button:hover {
+  background-color: ${hoverColor};
 }
 `;
 
   // While previewing, we don't want the "Edit" button to show or else you'll end up
   // with a Homepagerizer in your Homepagerizer.
   if (!showEditButton) {
-    style += `\n#edit{display:none;}`;
+    style += `\n#editDiv{display:none;}`;
   }
 
   const jsonData = {
@@ -209,7 +220,7 @@ ${javascript}
 <table>
 ${content}
 </table>
-<button id="edit" onclick="editHomepage();">Edit</button>
+<div id="editDiv"><button id="edit" onclick="editHomepage();">✏ Edit Homepage</button></div>
 </body>
 </html>
 `;
