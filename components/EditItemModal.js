@@ -43,6 +43,7 @@ export default function EditItemModal() {
             type="text"
             className="border rounded border-indigo-300 py-3 px-4 w-full"
             placeholder="Link text"
+            autoFocus
             value={text}
             onChange={(e) => {
               dispatch(
