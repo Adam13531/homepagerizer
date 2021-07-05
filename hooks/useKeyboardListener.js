@@ -86,7 +86,7 @@ export default function useKeyboardListener() {
         itemUsingKeyboardShortcut.id !== _.get(item, "id")
       ) {
         toast(
-          `${key} is already in use by "${itemUsingKeyboardShortcut.text}"; press another keyboard key or escape to cancel.`,
+          `${key} is already in use by "${itemUsingKeyboardShortcut.text}"; choose a different keyboard shortcut.`,
           {
             type: "error",
           }
