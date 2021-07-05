@@ -6,6 +6,20 @@
   @apply border rounded border-indigo-300;
 }
 
+.rc-tooltip-inner {
+  @apply bg-white text-indigo-900 border border-indigo-300 rounded;
+}
+
+/*
+ * This is sort of hacky to color tooltips when placed on the bottom.
+ * It's probably just worth switching libraries away from rc-tooltip if
+ * we ever hit styling problems.
+ * See: https://github.com/react-component/tooltip/issues/30
+ */
+.rc-tooltip-arrow {
+  border-bottom-color: rgba(165, 180, 252) !important;
+}
+
 body {
   font-family: Poppins;
 }

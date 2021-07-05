@@ -4,6 +4,7 @@ import { setHomepageTitle, selectHomepageTitle } from "../state/contentSlice";
 import { setShowImportDialog } from "../state/editingSlice";
 import useHomepageState from "../hooks/useHomepageState";
 import generateHtml from "../misc/generateHtml";
+import Tooltip from "rc-tooltip";
 
 export default function HeaderControls({}) {
   const dispatch = useDispatch();
@@ -38,14 +39,19 @@ export default function HeaderControls({}) {
         </button>
       </div>
       <div>
-        <button
-          onClick={() => {
-            dispatch(setShowImportDialog(true));
-          }}
-          className="text-indigo-900"
+        <Tooltip
+          placement="bottom"
+          overlay={<span>Import existing homepage</span>}
         >
-          <i class="las la-file-upload"></i>
-        </button>
+          <button
+            onClick={() => {
+              dispatch(setShowImportDialog(true));
+            }}
+            className="text-indigo-900"
+          >
+            <i class="las la-file-upload"></i>
+          </button>
+        </Tooltip>
       </div>
     </>
   );
