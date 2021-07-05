@@ -95,7 +95,7 @@ export default function EditItemModal() {
           </div>
           <div className="self-center">
             <button
-              className="text-red-600 font-semibold"
+              className="text-red-600"
               onClick={() => dispatch(deleteItem(rowNum, itemNum, id))}
             >
               <i className="lar la-trash-alt"></i> Delete Link
