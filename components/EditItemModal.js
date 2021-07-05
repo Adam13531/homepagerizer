@@ -43,6 +43,12 @@ function EditItemModalContent({ item, rowNum, itemNum }) {
     dispatch(setEditingItem(null, null));
   };
 
+  const handleSubmit = (e) => {
+    if (e.key === "Enter") {
+      onSave();
+    }
+  };
+
   const onSave = () => {
     dispatch(
       updateItem(rowNum, itemNum, {
@@ -72,6 +78,7 @@ function EditItemModalContent({ item, rowNum, itemNum }) {
             placeholder="Link text"
             autoFocus
             value={inputText}
+            onKeyPress={handleSubmit}
             onChange={(e) => {
               setInputText(e.target.value);
             }}
@@ -84,6 +91,7 @@ function EditItemModalContent({ item, rowNum, itemNum }) {
             className="border rounded border-indigo-300 py-3 px-2 w-full"
             placeholder="Link address"
             value={inputUrl}
+            onKeyPress={handleSubmit}
             onChange={(e) => {
               setInputUrl(e.target.value);
             }}
