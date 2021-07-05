@@ -14,7 +14,7 @@ export default function App() {
   useKeyboardListener();
 
   return (
-    <main>
+    <main id="root">
       <HTMLDropzone />
       <DndProvider backend={HTML5Backend}>
         <div className="w-4/5 mx-auto mt-4">
