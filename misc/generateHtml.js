@@ -21,21 +21,18 @@ function getLinkTextGivenShortcut(text, keyboardShortcut) {
     return text;
   }
 
-  // We only care about shortcuts that are letters and numbers, that way we
-  // don't end up putting a shortcut like "Backspace" in parentheses below.
   const alphanumericRegex = /^[a-zA-Z0-9]$/;
-  if (!alphanumericRegex.test(keyboardShortcut)) {
-    return text;
-  }
+  const isAlphanumericShortcut = alphanumericRegex.test(keyboardShortcut);
 
-  // If the text contains that character, highlight the first instance of it
-  const indexOfShortcut = text
-    .toLowerCase()
-    .indexOf(keyboardShortcut.toLowerCase());
-  if (indexOfShortcut !== -1) {
-    const start = text.substring(0, indexOfShortcut);
-    const end = text.substring(indexOfShortcut + 1);
-    return `${start}<span class="shortcut">${text[indexOfShortcut]}</span>${end}`;
+  if (isAlphanumericShortcut) {
+    const indexOfShortcut = text
+      .toLowerCase()
+      .indexOf(keyboardShortcut.toLowerCase());
+    if (indexOfShortcut !== -1) {
+      const start = text.substring(0, indexOfShortcut);
+      const end = text.substring(indexOfShortcut + 1);
+      return `${start}<span class="shortcut">${text[indexOfShortcut]}</span>${end}`;
+    }
   }
 
   return `${text} (<span class="shortcut">${keyboardShortcut}</span>)`;
