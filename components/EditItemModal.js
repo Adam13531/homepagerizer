@@ -9,6 +9,7 @@ import { deleteItem } from "../state/actions";
 import KeyboardShortcutButton from "./KeyboardShortcutButton";
 import { setIsListeningForHotkey } from "../state/keyboardSlice";
 import Checkbox from "rc-checkbox";
+import { defaultIfBlankStr } from "../misc/util";
 
 export default function EditItemModal() {
   const { rowNum, itemNum } = useSelector(selectEditingItem);
@@ -52,8 +53,11 @@ function EditItemModalContent({ item, rowNum, itemNum }) {
   const onSave = () => {
     dispatch(
       updateItem(rowNum, itemNum, {
-        text: inputText,
-        url: inputUrl,
+        text: defaultIfBlankStr(inputText, "New item"),
+
+        // If we allow a URL to contain only spaces, then clicking it will do
+        // nothing.
+        url: defaultIfBlankStr(inputUrl, ""),
         isSmallText: inputIsSmallText,
         keyboardShortcut: inputKeyboardShortcut,
       })

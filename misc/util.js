@@ -69,3 +69,18 @@ export function hexToRgb(hexString) {
 export function ensureStartsWithHash(str) {
   return str.startsWith("#") ? str : `#${str}`;
 }
+
+/**
+ * If the input string only contains whitespace, then the default value will be
+ * returned.
+ * @param {string} str
+ * @param {string} defaultValue
+ * @return {string}
+ */
+export function defaultIfBlankStr(str, defaultValue) {
+  if (_.isNil(str) || _.isEmpty(_.trim(str))) {
+    return defaultValue;
+  }
+
+  return str;
+}
