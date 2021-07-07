@@ -2,11 +2,11 @@
 
 Make simple, fast homepages completely for free. [Try it for yourself](https://homepagerizer.vercel.app/)!
 
-- HTML, JavaScript, and CSS all in one file, so it loads fast and technically doesn't require an Internet connection.
+- HTML, JavaScript, and CSS all in one file, so it loads fast (and technically doesn't require an Internet connection!).
 - MIT-licensed code, so you can change it however you want.
 - No ads or tracking whatsoever.
 
-Note that Homepagerizer does _not_ provide hosting for your site. The output of Homepagerizer is an HTML file.
+Note that Homepagerizer does _not_ provide hosting for your homepage. The output of Homepagerizer is an HTML file.
 
 ## Usage
 
@@ -21,6 +21,10 @@ First, go to https://homepagerizer.vercel.app/. Features like adding links or ro
 - **Changing the text size**: use your browser's zoom feature for this. For most browsers, you can press ctrl+plus (or ⌘plus) to zoom in. You need to do this for [Homepagerizer itself](https://homepagerizer.vercel.app/) _and_ for your resulting homepage.
 - **Rearranging links**: simply drag a link onto any other link to relocate it. You can even do this between rows.
 - **Rearranging rows**: drag by the "handle" on the left of a row to relocate it.
+- **Setting the font**: the font you customize under "Font Family" can be any font on your own machine, e.g. "Times New Roman", "Verdana", "[Hack](https://sourcefoundry.org/hack/)", or even something generic [like these](https://developer.mozilla.org/en-US/docs/Web/CSS/font-family).
+- **Text-only items**: if you _don't_ set a URL on an item, it will render as text, and it will get the "Text Color" property that you choose. This can be helpful for setting categories (e.g. "Social media:", "Videos/movies:", etc.).
+- **Clearing a keyboard shortcut**: if you set a keyboard shortcut for a link that you'd like to remove, start setting a new shortcut and press **backspace**.
+- **Non-https protocols**: typing something like `example.com` will create a link that navigates to `https://example.com`. If you want to override this (e.g. for `http://localhost:3000`), explicitly type a protocol in.
 
 ## Why use this over bookmarks or my browser's new-tab page?
 
@@ -39,6 +43,7 @@ I've been using a Homepagerizer-esque homepage for ~17-18 years now, and here's 
 - **Small text**: the small-text checkbox is there for long links or for keyboard-driven links. For example, I like to set my mail to "m", calendar to "c", etc. Since I mostly use the keyboard, there's no need to make those links take up a lot of space.
 - **Case-sensitive keyboard shortcuts**: hotkeys are case-sensitive, so "a" and "A" are different even though they may appear to be the same within a link.
 - **Changing the new-tab page _into_ your homepage**: at least in Chrome, this is only possible via [an extension](https://chrome.google.com/webstore/detail/new-tab-redirect/icpgjfneehieebagbmdbhnlpiopdcmna). Keep in mind that opening your homepage via the new-tab keyboard shortcut will require you to press tab before you can use Homepagerizer's keyboard shortcuts (since the focus will be on your browser's address bar).
+- **Ideas for links to include**: email, calendar, social media, banking, search, media (e.g. YouTube, Netflix), and any links you tend to forget.
 
 ## Development
 
@@ -64,5 +69,5 @@ While it would be possible to add this, there are a couple of reasons why I don'
 
 ## Credits
 
-- Code: Adam13531: [Twitch](https://twitch.tv/Adam13531) | [Discord](https://discord.gg/AdamLearns)
-- Design by Steven McCurrach: [Site](https://stevenmccurrach.com/) | [Twitter](https://twitter.com/WebBooooy)
+- Code: Adam13531 - [Twitch](https://twitch.tv/Adam13531) | [Discord](https://discord.gg/AdamLearns)
+- Design by Steven McCurrach - [Site](https://stevenmccurrach.com/) | [Twitter](https://twitter.com/WebBooooy)
