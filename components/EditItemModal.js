@@ -1,6 +1,6 @@
 import Modal from "react-modal";
 import _ from "lodash";
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setEditingItem } from "../state/editingSlice";
 import { selectEditingItem } from "../state/editingSlice";
@@ -36,6 +36,12 @@ function EditItemModalContent({ item, rowNum, itemNum }) {
   const [inputIsSmallText, setInputIsSmallText] = useState(isSmallText);
   const [inputKeyboardShortcut, setInputKeyboardShortcut] =
     useState(keyboardShortcut);
+
+  const inputRef = useCallback((node) => {
+    if (!_.isNil(node)) {
+      node.select();
+    }
+  }, []);
 
   const closeModal = () => {
     // Closing this dialog means you're no longer listening for a hotkey since
@@ -81,6 +87,7 @@ function EditItemModalContent({ item, rowNum, itemNum }) {
             className="border rounded border-indigo-300 py-3 px-4 w-full"
             placeholder="Link text"
             autoFocus
+            ref={inputRef}
             value={inputText}
             onKeyPress={handleSubmit}
             onChange={(e) => {
