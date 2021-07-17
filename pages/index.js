@@ -18,7 +18,7 @@ export default function Home() {
         }}
       />
       <Head>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/icon.svg" />
         <link
           href="https://fonts.googleapis.com/css?family=Poppins:400,600,700&display=swap"
           rel="stylesheet"
