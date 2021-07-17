@@ -170,6 +170,9 @@ button:hover {
   // has to be in the JavaScript itself is because the user may not have typed
   // the protocol, so when they edit the page, we don't want to add it in
   // automatically for them
+  //
+  // The reason we use encodeURIComponent is for Unicode/emojis:
+  // https://stackoverflow.com/questions/56647747/how-to-base64-encode-emojis-in-javascript
   const javascript = `
   const homepageJsonEle = document.getElementById('homepageJson');
   const json = JSON.parse(homepageJsonEle.text);
@@ -193,7 +196,8 @@ button:hover {
   });
 
   function editHomepage() {
-    window.location.href = json.homepagerizerAddress + '/?base64json=' + btoa(JSON.stringify(json));
+    const encodedJson = encodeURIComponent(JSON.stringify(json));
+    window.location.href = json.homepagerizerAddress + '/?encodedjson=' + encodedJson;
   }
 `;
 
