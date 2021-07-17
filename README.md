@@ -8,7 +8,7 @@ Make simple, fast homepages completely for free. [Try it for yourself](https://h
 
 Note that Homepagerizer does _not_ provide hosting for your homepage. The output of Homepagerizer is an HTML file.
 
-![homepagerizer_logo](https://user-images.githubusercontent.com/7192897/126023490-e18c267e-d3fa-4025-b9bd-090917e15b18.png)
+<img alt="Homepagerizer logo" src="https://user-images.githubusercontent.com/7192897/126023490-e18c267e-d3fa-4025-b9bd-090917e15b18.png" width="256" height="256" />
 
 ## Usage
 
