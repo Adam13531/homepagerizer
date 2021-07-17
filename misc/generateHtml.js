@@ -181,9 +181,9 @@ button:hover {
       }
     });
   });
-  window.addEventListener("keydown", ({key}) => {
+  window.addEventListener("keydown", ({ctrlKey, altKey, metaKey, key}) => {
     let url = keysToUrls[key];
-    if (url) {
+    if (url && !ctrlKey && !altKey && !metaKey) {
       const regex = /^\\w+:/g;
       if (!url.match(regex)) {
         url = 'https://' + url;
