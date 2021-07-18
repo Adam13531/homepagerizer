@@ -164,8 +164,6 @@ button:hover {
     homepageVersion: packageJson.homepageVersion,
   };
 
-  delete jsonData.selectedItem;
-
   // Note: the reason why the regex-matching logic for inserting the protocol
   // has to be in the JavaScript itself is because the user may not have typed
   // the protocol, so when they edit the page, we don't want to add it in
