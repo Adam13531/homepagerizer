@@ -2,6 +2,7 @@ import classNames from "classnames";
 import useDragAndDropRow from "../hooks/useDragAndDropRow";
 import { useDispatch } from "react-redux";
 import { addItemAtEndOfRow, deleteRow } from "../state/contentSlice";
+import Button, { ButtonThemes } from "./Button";
 
 export default function Row({ children, rowNum }) {
   const dispatch = useDispatch();
@@ -24,20 +25,20 @@ export default function Row({ children, rowNum }) {
       </div>
       <div className="gap-2 px-4 flex flex-wrap border border-r-0 border-l-0 border-indigo-300 py-4">
         {children}
-
-        <button
-          className="bg-indigo-50 text-indigo-900 cursor-pointer px-4 py-3 border border-indigo-300 rounded space-x-2 flex items-center h-14"
+        <Button
+          className="space-x-2 flex items-center h-14"
+          theme={ButtonThemes.LIGHT_INDIGO}
           onClick={() => dispatch(addItemAtEndOfRow(rowNum))}
         >
           <i className="las la-link"></i> Add link
-        </button>
+        </Button>
       </div>
-      <button
+      <Button
         onClick={() => dispatch(deleteRow(rowNum))}
-        className="border rounded-r-lg border-red-300 flex items-center text-red-600 px-2 bg-red-50"
+        className="border rounded-r-lg border-red-300 flex items-center text-red-600 px-2 bg-red-50 hover:bg-red-100 hover:border-red-400"
       >
         <i className="lar la-trash-alt font-bold"></i>
-      </button>
+      </Button>
     </div>
   );
 }

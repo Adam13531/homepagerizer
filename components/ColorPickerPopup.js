@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { SketchPicker } from "react-color";
 import { isColorBright } from "../misc/util";
+import Button, { ButtonThemes } from "./Button";
 
 export default function ColorPickerPopup({ onChange, color, text }) {
   const [displayColorPicker, setDisplayColorPicker] = useState(false);
@@ -43,13 +44,13 @@ export default function ColorPickerPopup({ onChange, color, text }) {
             onChange(e.target.value);
           }}
         />
-        <button
+        <Button
           style={buttonStyle}
-          className="border rounded-r border-indigo-300 py-3 px-4"
+          theme={ButtonThemes.COLOR_PICKER}
           onClick={handleClick}
         >
           <i className="las la-fill-drip text-lg"></i>
-        </button>
+        </Button>
       </div>
       {displayColorPicker && (
         <div style={popover}>

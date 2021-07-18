@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import Button, { ButtonThemes } from "./Button";
 import {
   selectLastPressedHotkey,
   setLastPressedHotkey,
@@ -45,13 +46,13 @@ export default function KeyboardShortcutButton({
   }
 
   return (
-    <button
-      className="p-3 text-indigo-900 border-indigo-300 border rounded "
+    <Button
+      theme={ButtonThemes.WHITE}
       onClick={() => {
         dispatch(setIsListeningForHotkey(!isListeningForHotkey));
       }}
     >
       {keyboardShortcutText}
-    </button>
+    </Button>
   );
 }

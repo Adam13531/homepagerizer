@@ -3,6 +3,7 @@ import Row from "./Row";
 import RowItem from "./RowItem";
 import { useSelector, useDispatch } from "react-redux";
 import { addRow, selectRows } from "../state/contentSlice";
+import Button, { ButtonThemes } from "./Button";
 
 export default function Rows() {
   const rows = useSelector(selectRows);
@@ -34,14 +35,14 @@ export default function Rows() {
         })}
       </div>
       <div className="flex justify-end">
-        <button
-          className="bg-indigo-50 border-indigo-300 text-indigo-900 border rounded px-4 py-3"
+        <Button
+          theme={ButtonThemes.LIGHT_INDIGO}
           onClick={() => {
             dispatch(addRow());
           }}
         >
           <i className="las la-plus-circle"></i> Add Row
-        </button>
+        </Button>
       </div>
     </>
   );

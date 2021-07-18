@@ -1,5 +1,6 @@
 import Modal from "react-modal";
 import _ from "lodash";
+import Button, { ButtonThemes } from "./Button";
 import { useState, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setEditingItem } from "../state/editingSlice";
@@ -128,28 +129,22 @@ function EditItemModalContent({ item, rowNum, itemNum }) {
             </label>
           </div>
           <div className="self-center">
-            <button
-              className="text-red-600"
+            <Button
+              theme={ButtonThemes.DELETE_LINK}
               onClick={() => dispatch(deleteItem(rowNum, itemNum, id))}
             >
               <i className="lar la-trash-alt"></i> Delete Link
-            </button>
+            </Button>
           </div>
           <div className="flex space-x-4">
             <div>
-              <button
-                className="border border-indigo-300 rounded bg-indigo-50 py-3 px-4"
-                onClick={closeModal}
-              >
+              <Button theme={ButtonThemes.LIGHT_INDIGO} onClick={closeModal}>
                 Close
-              </button>
+              </Button>
             </div>
-            <button
-              className="border border-indigo-700 text-white rounded bg-indigo-700 py-3 px-4"
-              onClick={onSave}
-            >
+            <Button theme={ButtonThemes.DARK_INDIGO} onClick={onSave}>
               Save Link
-            </button>
+            </Button>
           </div>
         </div>
       </div>

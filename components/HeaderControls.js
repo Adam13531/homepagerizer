@@ -2,6 +2,7 @@ import { saveAs } from "file-saver";
 import { useSelector, useDispatch } from "react-redux";
 import { setHomepageTitle, selectHomepageTitle } from "../state/contentSlice";
 import { setShowImportDialog } from "../state/editingSlice";
+import Button, { ButtonThemes } from "./Button";
 import useHomepageState from "../hooks/useHomepageState";
 import generateHtml from "../misc/generateHtml";
 import Tooltip from "rc-tooltip";
@@ -31,26 +32,23 @@ export default function HeaderControls({}) {
             dispatch(setHomepageTitle(e.target.value));
           }}
         />
-        <button
-          onClick={onSave}
-          className="bg-indigo-700 text-white rounded py-3 px-4"
-        >
+        <Button onClick={onSave} theme={ButtonThemes.DARK_INDIGO}>
           <i className="las la-arrow-circle-down"></i> Save & Download
-        </button>
+        </Button>
       </div>
       <div>
         <Tooltip
           placement="bottom"
           overlay={<span>Import existing homepage</span>}
         >
-          <button
+          <Button
             onClick={() => {
               dispatch(setShowImportDialog(true));
             }}
-            className="text-indigo-900"
+            theme={ButtonThemes.ICON}
           >
             <i className="las la-file-upload"></i>
-          </button>
+          </Button>
         </Tooltip>
       </div>
     </>

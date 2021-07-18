@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { loadSavedState } from "../state/actions";
 import { parseHtml } from "../misc/parseHtml";
 import { useDispatch, useSelector } from "react-redux";
+import Button, { ButtonThemes } from "./Button";
 import Modal from "react-modal";
 import {
   selectIsImportDialogOpen,
@@ -91,18 +92,12 @@ export default function HTMLDropzone({}) {
             </div>
           </div>
           <div className="flex justify-end self-stretch gap-x-4">
-            <button
-              onClick={closeModal}
-              className="py-3 px-4 bg-indigo-50 border border-indigo-300 rounded"
-            >
+            <Button onClick={closeModal} theme={ButtonThemes.LIGHT_INDIGO}>
               Cancel
-            </button>
-            <button
-              onClick={open}
-              className="py-3 px-4 bg-indigo-50 border border-indigo-300 rounded"
-            >
+            </Button>
+            <Button onClick={open} theme={ButtonThemes.LIGHT_INDIGO}>
               Import
-            </button>
+            </Button>
           </div>
         </div>
       </div>

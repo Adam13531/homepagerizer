@@ -16,7 +16,7 @@ export default function RowItem({ item, itemNum, rowNum }) {
   const isKeyboardShortcutSet = !_.isNil(keyboardShortcut);
 
   const constantItemClasses =
-    "text-indigo-900 cursor-pointer px-4 py-3 border border-indigo-300 rounded space-x-2 flex items-center h-14";
+    "text-indigo-900 cursor-pointer px-4 py-3 border border-indigo-300 rounded space-x-2 flex items-center h-14 hover:bg-indigo-50";
   const itemCss = classNames({
     [constantItemClasses]: true,
     "bg-indigo-300": isDraggingOver,
