@@ -32,9 +32,11 @@ function decodeJson(urlParams) {
   if (!_.isNil(base64Json)) {
     jsonStr = atob(base64Json);
   } else {
+    // Note: urlParams.get will automatically call decodeURIComponent, so we do
+    // not call it again ourselves.
     const encodedJson = urlParams.get("encodedjson");
     if (!_.isNil(encodedJson)) {
-      jsonStr = decodeURIComponent(encodedJson);
+      jsonStr = encodedJson;
     }
   }
 
