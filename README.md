@@ -1,6 +1,6 @@
 # Homepagerizer
 
-Make simple, fast homepages completely for free. [Try it for yourself](https://homepagerizer.vercel.app/)!
+Make simple, fast homepages completely for free. [Try it for yourself](https://homepagerizer.vercel.app/) or check out the [overview video](https://youtu.be/6u4w4HLixP0).
 
 - HTML, JavaScript, and CSS all in one file, so it loads fast (and technically doesn't require an Internet connection!).
 - MIT-licensed code, so you can change it however you want.
