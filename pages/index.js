@@ -15,6 +15,14 @@ export default function Home() {
           title: "Homepagerizer",
           url: "https://homepagerizer.vercel.app",
           description: "Make simple, fast homepages completely for free.",
+          images: [
+            {
+              url: "https://user-images.githubusercontent.com/7192897/126023490-e18c267e-d3fa-4025-b9bd-090917e15b18.png",
+              width: 512,
+              height: 512,
+              alt: "Homepagerizer logo",
+            },
+          ],
         }}
       />
       <Head>
