@@ -5,7 +5,7 @@ import uniqid from "uniqid";
 
 const reducerName = "content";
 const defaultHorizontalSpacing = 4;
-const defaultVerticalSpacing = 2;
+const defaultVerticalSpacing = 4;
 
 function makeNewTextItem() {
   return {
