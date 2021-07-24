@@ -65,6 +65,8 @@ export default function generateHtml(state, { showEditButton = true }) {
     linkColor,
     textColor,
     fontFamily,
+    horizontalSpacing,
+    verticalSpacing,
     homepageTitle,
   } = state;
   _.forEach(rows, (row) => {
@@ -76,10 +78,10 @@ export default function generateHtml(state, { showEditButton = true }) {
       const { text, url, isSmallText, keyboardShortcut } = rowItem;
       let rowContents = "";
       if (url === "") {
-        rowContents = `<span>${text}</span>\n`;
+        rowContents = `<span class="text">${text}</span>\n`;
       } else {
         const urlWithProtocol = addHttpsIfNoProtocolPresent(url);
-        rowContents = `<a href=${urlWithProtocol}>${getLinkTextGivenShortcut(
+        rowContents = `<a class="link" href=${urlWithProtocol}>${getLinkTextGivenShortcut(
           text,
           keyboardShortcut
         )}</a>\n`;
@@ -131,6 +133,14 @@ a:hover {
 
 table {
   border: 0;
+}
+
+.link {
+  margin-right: ${horizontalSpacing}px;
+}
+
+.text {
+  margin-right: ${horizontalSpacing}px;
 }
 
 #editDiv {
@@ -216,7 +226,7 @@ ${javascript}
 </script>
 </head>
 <body>
-<table>
+<table cellspacing="${verticalSpacing}">
 ${content}
 </table>
 <div id="editDiv"><button id="edit" onclick="editHomepage();">✏ Edit Homepage</button></div>

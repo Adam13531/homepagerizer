@@ -6,7 +6,7 @@ export default function FontPicker({}) {
   const fontFamily = useSelector(selectFontFamily);
 
   return (
-    <>
+    <span>
       <div className="text-indigo-900 mb-2">Font Family</div>
       <input
         type="text"
@@ -17,6 +17,6 @@ export default function FontPicker({}) {
           dispatch(setFontFamily(e.target.value));
         }}
       />
-    </>
+    </span>
   );
 }

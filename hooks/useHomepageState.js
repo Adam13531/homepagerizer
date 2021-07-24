@@ -5,6 +5,8 @@ import {
   selectRows,
   selectHomepagerizerAddress,
   selectFontFamily,
+  selectHorizontalSpacing,
+  selectVerticalSpacing,
   selectHomepageTitle,
 } from "../state/contentSlice";
 
@@ -17,16 +19,28 @@ export default function useHomepageState() {
   const rows = useSelector(selectRows);
   const homepagerizerAddress = useSelector(selectHomepagerizerAddress);
   const fontFamily = useSelector(selectFontFamily);
+  const horizontalSpacing = useSelector(selectHorizontalSpacing);
+  const verticalSpacing = useSelector(selectVerticalSpacing);
   const homepageTitle = useSelector(selectHomepageTitle);
   const state = useMemo(() => {
     return {
       rows,
       homepagerizerAddress,
       fontFamily,
+      horizontalSpacing,
+      verticalSpacing,
       homepageTitle,
       ...allColors,
     };
-  }, [rows, homepagerizerAddress, fontFamily, homepageTitle, allColors]);
+  }, [
+    rows,
+    homepagerizerAddress,
+    fontFamily,
+    horizontalSpacing,
+    verticalSpacing,
+    homepageTitle,
+    allColors,
+  ]);
 
   return state;
 }

@@ -15,6 +15,19 @@ function makeNewTextItem() {
   };
 }
 
+/**
+ * Given a string representing a number, return its corresponding value clamped
+ * to non-negative values with a precision of 1 decimal place.
+ * @param {string} payload
+ * @returns {number}
+ */
+function parseSpacingPayload(payload) {
+  const payloadAsNumber = _.defaultTo(parseFloat(payload, 10), 0);
+  const rounded = _.round(payloadAsNumber, 1);
+
+  return Math.max(0, rounded);
+}
+
 export const slice = createSlice({
   name: reducerName,
   initialState: {
@@ -38,6 +51,13 @@ export const slice = createSlice({
      * @type {string}
      */
     fontFamily: "",
+
+    /**
+     * Space in pixels between items.
+     * @param {number}
+     */
+    horizontalSpacing: 0,
+    verticalSpacing: 0,
   },
   reducers: {
     addRow: (state) => {
@@ -91,6 +111,12 @@ export const slice = createSlice({
     setFontFamily: (state, { payload }) => {
       state.fontFamily = payload;
     },
+    setHorizontalSpacing: (state, { payload }) => {
+      state.horizontalSpacing = parseSpacingPayload(payload);
+    },
+    setVerticalSpacing: (state, { payload }) => {
+      state.verticalSpacing = parseSpacingPayload(payload);
+    },
     setHomepageTitle: (state, { payload }) => {
       state.homepageTitle = payload;
     },
@@ -99,6 +125,8 @@ export const slice = createSlice({
     builder.addCase(loadSavedState, (state, { payload }) => {
       state.rows = payload.rows;
       state.fontFamily = payload.fontFamily;
+      state.horizontalSpacing = payload.horizontalSpacing;
+      state.verticalSpacing = payload.verticalSpacing;
       state.homepageTitle = payload.homepageTitle;
     });
     builder.addCase(deleteItem, (state, { payload }) => {
@@ -118,6 +146,8 @@ export const {
   addItemAtEndOfRow,
   setHomepagerizerAddress,
   setFontFamily,
+  setHorizontalSpacing,
+  setVerticalSpacing,
   setHomepageTitle,
 } = slice.actions;
 
@@ -131,6 +161,10 @@ export const selectItem = (rowNum, itemNum) => (state) => {
 export const selectHomepagerizerAddress = (state) =>
   state[reducerName].homepagerizerAddress;
 export const selectFontFamily = (state) => state[reducerName].fontFamily;
+export const selectHorizontalSpacing = (state) =>
+  state[reducerName].horizontalSpacing;
+export const selectVerticalSpacing = (state) =>
+  state[reducerName].verticalSpacing;
 export const selectHomepageTitle = (state) => state[reducerName].homepageTitle;
 
 export default slice.reducer;
