@@ -137,6 +137,7 @@ table {
 
 .link {
   margin-right: ${horizontalSpacing}px;
+  white-space: nowrap;
 }
 
 .text {
