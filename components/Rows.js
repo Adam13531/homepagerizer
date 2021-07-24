@@ -43,6 +43,8 @@ export default function Rows() {
         <Button
           theme={ButtonThemes.LIGHT_INDIGO}
           onClick={() => {
+            // Note: this scrolls before the new row is added, which isn't
+            // exactly what we want since the new row may not be in view.
             scrollArea.current.scrollTop = scrollArea.current.scrollHeight;
             dispatch(addRow());
           }}
