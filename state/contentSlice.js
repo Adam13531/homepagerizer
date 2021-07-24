@@ -4,6 +4,8 @@ import { loadSavedState, deleteItem } from "./actions";
 import uniqid from "uniqid";
 
 const reducerName = "content";
+const defaultHorizontalSpacing = 4;
+const defaultVerticalSpacing = 2;
 
 function makeNewTextItem() {
   return {
@@ -56,8 +58,8 @@ export const slice = createSlice({
      * Space in pixels between items.
      * @param {number}
      */
-    horizontalSpacing: 0,
-    verticalSpacing: 0,
+    horizontalSpacing: defaultHorizontalSpacing,
+    verticalSpacing: defaultVerticalSpacing,
   },
   reducers: {
     addRow: (state) => {
@@ -125,8 +127,14 @@ export const slice = createSlice({
     builder.addCase(loadSavedState, (state, { payload }) => {
       state.rows = payload.rows;
       state.fontFamily = payload.fontFamily;
-      state.horizontalSpacing = payload.horizontalSpacing;
-      state.verticalSpacing = payload.verticalSpacing;
+      state.horizontalSpacing = _.defaultTo(
+        payload.horizontalSpacing,
+        defaultHorizontalSpacing
+      );
+      state.verticalSpacing = _.defaultTo(
+        payload.verticalSpacing,
+        defaultVerticalSpacing
+      );
       state.homepageTitle = payload.homepageTitle;
     });
     builder.addCase(deleteItem, (state, { payload }) => {

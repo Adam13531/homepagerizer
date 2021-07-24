@@ -78,7 +78,7 @@ export default function generateHtml(state, { showEditButton = true }) {
       const { text, url, isSmallText, keyboardShortcut } = rowItem;
       let rowContents = "";
       if (url === "") {
-        rowContents = `<span class="text">${text}</span>\n`;
+        rowContents = `<span>${text}</span>\n`;
       } else {
         const urlWithProtocol = addHttpsIfNoProtocolPresent(url);
         rowContents = `<a class="link" href=${urlWithProtocol}>${getLinkTextGivenShortcut(
@@ -91,7 +91,7 @@ export default function generateHtml(state, { showEditButton = true }) {
       }
       rowElements += `${rowContents}`;
     });
-    content += `<tr><td>${rowElements}</td></tr>`;
+    content += `<div class="row">${rowElements}</div>`;
   });
 
   let safeFontFamily = "sans-serif";
@@ -131,17 +131,22 @@ a:hover {
   font-size: 0.5rem;
 }
 
-table {
-  border: 0;
+.rows {
+  display: flex;
+  flex-direction: column;
+  row-gap: ${verticalSpacing}px;
+}
+
+.row {
+  align-items: baseline;
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: ${verticalSpacing}px;
+  column-gap: ${horizontalSpacing}px;
 }
 
 .link {
-  margin-right: ${horizontalSpacing}px;
   white-space: nowrap;
-}
-
-.text {
-  margin-right: ${horizontalSpacing}px;
 }
 
 #editDiv {
@@ -227,9 +232,9 @@ ${javascript}
 </script>
 </head>
 <body>
-<table cellspacing="${verticalSpacing}">
+<span class="rows">
 ${content}
-</table>
+</span>
 <div id="editDiv"><button id="edit" onclick="editHomepage();">✏ Edit Homepage</button></div>
 </body>
 </html>
