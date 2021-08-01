@@ -10,6 +10,10 @@ Note that Homepagerizer does _not_ provide hosting for your homepage. The output
 
 <img alt="Homepagerizer logo" src="https://user-images.githubusercontent.com/7192897/126023490-e18c267e-d3fa-4025-b9bd-090917e15b18.png" width="256" height="256" />
 
+## Screenshot
+
+<img width="600" alt="homepagerizer" src="https://user-images.githubusercontent.com/7192897/127780331-0b803a66-4ce5-474e-a2f4-53233cb4c6aa.png">
+
 ## Usage
 
 First, go to https://homepagerizer.vercel.app/. Features like adding links or rows should be straightforward.
