@@ -5,10 +5,10 @@ export default function Footer() {
         Homepagerizer was created by{" "}
         <a
           className="underline"
-          href="https://twitch.tv/Adam13531"
+          href="https://twitch.tv/AdamLearnsLive"
           rel="noopener noreferrer"
         >
-          Adam13531
+          AdamLearnsLive
         </a>{" "}
         (
         <a

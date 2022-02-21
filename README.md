@@ -75,6 +75,6 @@ While it would be possible to add this, there are a couple of reasons why I don'
 
 ## Credits
 
-- Code: Adam13531 - [Twitch](https://twitch.tv/Adam13531) | [Discord](https://discord.gg/AdamLearns)
+- Code: AdamLearnsLive - [Twitch](https://twitch.tv/AdamLearnsLive) | [Discord](https://discord.gg/AdamLearns)
 - Design by Steven McCurrach - [Site](https://stevenmccurrach.com/) | [Twitter](https://twitter.com/WebBooooy)
 - Logo/favicon by Jay Estabrook - [Twitter](https://twitter.com/jay_estabrook)
